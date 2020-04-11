@@ -1,4 +1,4 @@
-package sample;
+package sample.kamarieri;
 
 
 public class Controller {

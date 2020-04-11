@@ -1,13 +1,10 @@
-package sample;
+package sample.kamarieri;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
     private double xOffset = 0;
@@ -16,10 +13,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("eCaffe");
 
+        /*
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -34,6 +32,8 @@ public class Main extends Application {
                 primaryStage.setY(event.getScreenY() - yOffset);
             }
         });
+
+         */
 
 
         primaryStage.setScene(new Scene(root, 800, 600));
