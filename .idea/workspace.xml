@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_48.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/albcaffe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/albcaffe.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/META-INF/albcaffe.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/sample.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,20 +19,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
   </component>
   <component name="DebuggerManager">
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
@@ -62,9 +58,6 @@
     <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="JavaFxApplication" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -81,7 +74,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/sample" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectId" id="1a32IcdXt8umJd4WIrVLELR7NIK" />
@@ -91,10 +84,10 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -102,11 +95,13 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -146,7 +141,7 @@
     <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.login.Login" />
       <module name="albcaffe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.login.*" />
@@ -158,9 +153,9 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="sample.Main" />
+      <option name="MAIN_CLASS_NAME" value="sample.kamarieri.Main" />
       <module name="albcaffe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.*" />
@@ -169,6 +164,20 @@
       </extension>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.Menu.Menu" />
+      <module name="albcaffe" />
+      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.Menu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -210,9 +219,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Login" />
+      <item itemvalue="Application.Menu" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Login" />
+        <item itemvalue="Application.Menu" />
       </list>
     </recent_temporary>
   </component>
@@ -232,11 +247,23 @@
       <workItem from="1586271849641" duration="488000" />
       <workItem from="1586356223700" duration="26000" />
       <workItem from="1586632972370" duration="8772000" />
+      <workItem from="1587409920344" duration="20000" />
+      <workItem from="1587409982463" duration="47000" />
+      <workItem from="1587410103126" duration="4306000" />
+      <workItem from="1587457492808" duration="3564000" />
+      <workItem from="1587464987643" duration="1654000" />
+      <workItem from="1587470838130" duration="8849000" />
+      <workItem from="1587479794465" duration="5317000" />
+      <workItem from="1587485663113" duration="19000" />
+      <workItem from="1587487376085" duration="19000" />
+      <workItem from="1587487533233" duration="606000" />
+      <workItem from="1587489050001" duration="1215000" />
+      <workItem from="1587507794914" duration="37000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
@@ -246,48 +273,75 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1586637354983">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="305" y="406" width="1367" height="301" key="#SQL_Dialects" timestamp="1587480920039">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="305" y="406" width="1367" height="301" key="#SQL_Dialects/67.27.1853.1053@67.27.1853.1053" timestamp="1587480920039" />
+    <state x="451" y="211" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587475773614">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="451" y="211" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1587475773614" />
+    <state x="805" y="259" width="374" height="592" key="#com.intellij.ide.util.MemberChooser" timestamp="1587465482158">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586637354983" />
-    <state width="1877" height="283" key="GridCell.Tab.0.bottom" timestamp="1586644494293">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="805" y="259" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1587465482158" />
+    <state x="532" y="397" width="735" height="520" key="FileChooserDialogImpl" timestamp="1587476658187">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="532" y="397" width="735" height="520" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1587476658187" />
+    <state width="1807" height="274" key="GridCell.Tab.0.bottom" timestamp="1587507831724">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1877" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
-    <state width="1877" height="283" key="GridCell.Tab.0.center" timestamp="1586644494293">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1807" height="274" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587507831724" />
+    <state width="1807" height="274" key="GridCell.Tab.0.center" timestamp="1587507831724">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1877" height="283" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
-    <state width="1877" height="283" key="GridCell.Tab.0.left" timestamp="1586644494293">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1807" height="274" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587507831724" />
+    <state width="1807" height="274" key="GridCell.Tab.0.left" timestamp="1587507831724">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1877" height="283" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
-    <state width="1877" height="283" key="GridCell.Tab.0.right" timestamp="1586644494293">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1807" height="274" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587507831724" />
+    <state width="1807" height="274" key="GridCell.Tab.0.right" timestamp="1587507831724">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1877" height="283" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1586634362893">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1807" height="274" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587507831724" />
+    <state width="1807" height="340" key="GridCell.Tab.1.bottom" timestamp="1587485112357">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587485112357" />
+    <state width="1807" height="340" key="GridCell.Tab.1.center" timestamp="1587485112357">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587485112357" />
+    <state width="1807" height="340" key="GridCell.Tab.1.left" timestamp="1587485112357">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587485112357" />
+    <state width="1807" height="340" key="GridCell.Tab.1.right" timestamp="1587485112357">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587485112357" />
+    <state x="393" y="228" width="1024" height="852" key="SettingsEditor" timestamp="1587476671060">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586634362893" />
+    <state x="393" y="228" width="1024" height="852" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1587476671060" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1586869499547">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586869499547" />
+    <state x="764" y="468" width="458" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587481465921">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="764" y="468" width="458" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1587481465921" />
     <state x="623" y="225" key="search.everywhere.popup" timestamp="1586638628813">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586638628813" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/kamarieri/Main.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
