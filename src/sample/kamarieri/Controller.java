@@ -30,15 +30,17 @@ public class Controller implements Initializable {
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception{
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("C:\\Users\\Rinor\\Desktop\\KNK_Gr_22\\src\\sample\\initialMenu\\initialMenu.fxml"));
+            root = FXMLLoader.load(getClass().getResource(".././firstMenu/FirstMenu.fxml"));
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
         }
 
+
+
+
         Scene dashboard = new Scene(root);
 
-        //This line gets the Stage Information
-        //here we get the stage from event action and setting the root element in the scene and display scene with stage object (window) which is retrieved from action event
+
         Stage window=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(dashboard);
 

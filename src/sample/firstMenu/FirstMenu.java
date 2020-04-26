@@ -1,4 +1,4 @@
-package sample.initialMenu;
+package sample.firstMenu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,15 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class InitialMenu extends Application {
+public class FirstMenu extends Application {
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
         //primaryStage.initStyle(StageStyle.UNDECORATED);
-        Parent root = FXMLLoader.load(getClass().getResource("initialMenu.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("FirstMenu.fxml"));
         primaryStage.setTitle("eCaffe");
+
+
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 

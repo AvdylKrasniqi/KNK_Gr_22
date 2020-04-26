@@ -1,4 +1,4 @@
-package sample.Menu;
+package sample.Food;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,12 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import sample.Menu.DbMenu;
 
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class FoodController implements Initializable {
 
     private static final String firstConnection = "jdbc:mysql://185.67.178.114:3306/art_knk_db";
     private static final String username = "art_knk";
@@ -81,21 +82,21 @@ public class Controller implements Initializable {
 
     @FXML
     private void onUpdateButtonClick(ActionEvent event) {
-       try
-       {
-           DbMenu form=menuFromUI();
-           updateItem(form);
-           DbMenu selected=tableview.getSelectionModel().getSelectedItem();
-           selected.setTitle(form.getTitle());
-           selected.setPrice(form.getPrice());
-           tableview.refresh();
-           tableview.getSelectionModel().clearSelection();
+        try
+        {
+            DbMenu form=menuFromUI();
+            updateItem(form);
+            DbMenu selected=tableview.getSelectionModel().getSelectedItem();
+            selected.setTitle(form.getTitle());
+            selected.setPrice(form.getPrice());
+            tableview.refresh();
+            tableview.getSelectionModel().clearSelection();
             clearUI();
-       }
-       catch(Exception e)
-       {
-        printError(e);
-       }
+        }
+        catch(Exception e)
+        {
+            printError(e);
+        }
 
     }
 
@@ -120,7 +121,7 @@ public class Controller implements Initializable {
 
     private DbMenu createItem(DbMenu menu) throws Exception {
         Statement stmt = conn.createStatement();
-        String sql = String.format("INSERT INTO Menu (price,MenuType,Title) values(%f,'drink','%s')", menu.getPrice(), menu.getTitle());
+        String sql = String.format("INSERT INTO Menu (price,MenuType,Title) values(%f,'food','%s')", menu.getPrice(), menu.getTitle());
         int affectedRows = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
         if (affectedRows <= 0)
             throw new Exception("No row created");
@@ -151,9 +152,9 @@ public class Controller implements Initializable {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1,id);
 
-    int affectedRows=stmt.executeUpdate();
-    if(affectedRows!=1)
-        throw new Exception("Gabime ne fshirje(delete)");
+        int affectedRows=stmt.executeUpdate();
+        if(affectedRows!=1)
+            throw new Exception("Gabime ne fshirje(delete)");
     }
 
     private DbMenu menuFromUI() {
@@ -181,7 +182,7 @@ public class Controller implements Initializable {
     private ObservableList<DbMenu> getItems() throws Exception {
         ObservableList<DbMenu> items = FXCollections.observableArrayList();
         Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT * FROM Menu where MenuType='drink' ");
+        ResultSet res = stmt.executeQuery("SELECT * FROM Menu  where MenuType='food' ");
         while (res.next()) {
             int id = res.getInt(1);
             Double price = res.getDouble("price");

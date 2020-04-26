@@ -1,0 +1,55 @@
+package sample.firstMenu;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class FirstMenuController implements Initializable {
+    @FXML
+    private Button pijeButton;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
+
+
+
+@FXML
+    public void goToDrinks(javafx.event.ActionEvent event) {
+    Parent root = null;
+    try {
+
+
+        root = FXMLLoader.load(getClass().getResource("./../Menu/Menu.fxml"));
+
+    } catch (IOException e) {
+        System.out.println("Path eshte gabim");
+
+    }
+
+    Scene dashboard = new Scene(root);
+
+    //This line gets the Stage Information
+    //here we get the stage from event action and setting the root element in the scene and display scene with stage object (window) which is retrieved from action event
+    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    window.setScene(dashboard);
+
+    window.show();
+
+    }
+}
+
+
