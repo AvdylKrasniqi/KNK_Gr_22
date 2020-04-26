@@ -27,10 +27,10 @@ public class Controller implements Initializable {
     }
 
 @FXML
-    public void openMenu(javafx.event.ActionEvent actionEvent) {
+    public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception{
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("./../Menu/Menu.fxml"));
+            root = FXMLLoader.load(getClass().getResource("C:\\Users\\Rinor\\Desktop\\KNK_Gr_22\\src\\sample\\initialMenu\\initialMenu.fxml"));
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
         }

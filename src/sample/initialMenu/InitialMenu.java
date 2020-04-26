@@ -15,9 +15,6 @@ public class InitialMenu extends Application {
         //primaryStage.initStyle(StageStyle.UNDECORATED);
         Parent root = FXMLLoader.load(getClass().getResource("initialMenu.fxml"));
         primaryStage.setTitle("eCaffe");
-
-
-
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 

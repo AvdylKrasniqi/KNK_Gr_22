@@ -43,22 +43,22 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
                     <children>
-                        <Button layoutX="54.0" layoutY="428.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="133.0" stylesheets="@../css/style.css" text="About">
+                        <Button layoutX="57.0" layoutY="428.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="About">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="57.0" layoutY="344.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" stylesheets="@../css/style.css" text="Waiter">
+                        <Button layoutX="57.0" layoutY="344.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Waiter">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="56.0" layoutY="256.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Menu">
+                        <Button layoutX="56.0" layoutY="256.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Menu">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="56.0" layoutY="162.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Table">
+                        <Button layoutX="56.0" layoutY="162.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Table">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
@@ -98,7 +98,7 @@
                         <Image url="@../Images/icons8-contacts-128.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="5.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="45.0" fitWidth="44.0" layoutX="10.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/icons8-restaurant-menu-96.png" />
                      </image>
@@ -179,7 +179,10 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Id" />
+                        <Label text="Id">
+                           <GridPane.margin>
+                              <Insets left="3.0" />
+                           </GridPane.margin></Label>
                         <Label text="Title" GridPane.columnIndex="1" />
                         <Label text="Price" GridPane.columnIndex="2" />
                         <TextField fx:id="idField" disable="true" GridPane.rowIndex="1" />
