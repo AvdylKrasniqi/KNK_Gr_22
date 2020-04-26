@@ -140,7 +140,7 @@ public class Controller implements Initializable {
 
     }
 
-    private void printError(Exception e) {
+    public static void printError(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(e.toString());
         alert.showAndWait();

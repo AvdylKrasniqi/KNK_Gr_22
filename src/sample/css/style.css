@@ -1,6 +1,12 @@
 .button {
     -fx-background-color:#ff9800;
     -fx-font-weight:bold;
+}
+
+.menu-foodtext {
+-fx-font-weight: bold;
+    -fx-color:red;
 
 
 }
+
