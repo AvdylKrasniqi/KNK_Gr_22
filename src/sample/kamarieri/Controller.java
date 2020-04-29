@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -19,14 +21,29 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     @FXML
     private Button MenuTab;
-
+    @FXML
+    private AnchorPane aboutPane;
+    @FXML
+    private GridPane MainPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+    @FXML
+    public void openAbout(javafx.event.ActionEvent actionEvent) throws Exception
+    {
+        System.out.println("ASFUIASF");
+        AnchorPane root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(".././about/about.fxml"));
+            MainPane.add((AnchorPane)root,1,1);
+        } catch (IOException e) {
+            System.out.println("Path eshte gabim");
+        }
+    }
 
-@FXML
+    @FXML
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception{
         Parent root = null;
         try {
@@ -34,16 +51,9 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
         }
-
-
-
-
         Scene dashboard = new Scene(root);
-
-
         Stage window=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(dashboard);
-
         window.show();
     }
 }

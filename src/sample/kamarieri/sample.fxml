@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,15 +18,14 @@
 
 <BorderPane id="borderiii" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.kamarieri.Controller">
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane fx:id="MainPane" prefHeight="632.0" prefWidth="815.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="173.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="599.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="56.0" vgrow="NEVER" />
-          <RowConstraints maxHeight="461.0" minHeight="10.0" prefHeight="293.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="251.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="544.8" minHeight="10.0" prefHeight="522.4000366210937" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FF851B;">
@@ -37,9 +37,9 @@
                   </Text>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+            <Pane prefHeight="565.0" prefWidth="201.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
                <children>
-                  <Button layoutX="54.0" layoutY="428.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="133.0" stylesheets="@../css/style.css" text="About">
+                  <Button fx:id="AboutTab" layoutX="54.0" layoutY="428.0" mnemonicParsing="false" onAction="#openAbout" prefHeight="33.0" prefWidth="133.0" stylesheets="@../css/style.css" text="About">
                      <font>
                         <Font name="Ubuntu Bold" size="13.0" />
                      </font>
@@ -118,18 +118,18 @@
             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-padding: 10px; -fx-background-color: white; -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 9,0,0,1 );" GridPane.columnIndex="1">
                <children>
                   <Region prefHeight="36.0" prefWidth="426.0" />
-                  <Label alignment="CENTER" prefWidth="81.0" text="Admin" textAlignment="RIGHT">
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="100.0" text="Admin" textAlignment="RIGHT">
                      <font>
                         <Font name="Ubuntu" size="18.0" />
                      </font>
                      <padding>
-                        <Insets left="17.0" top="7.0" />
+                        <Insets left="10.0" top="13.0" />
                      </padding>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <ImageView fitHeight="40.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../Downloads/agjentifbi.png" />
                      </image>
@@ -141,9 +141,13 @@
                      <image>
                         <Image url="@../Images/agjentifbi.png" />
                      </image>
+                     <HBox.margin>
+                        <Insets left="-40.0" right="10.0" />
+                     </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
+            <AnchorPane fx:id="aboutPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>
