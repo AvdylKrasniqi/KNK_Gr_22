@@ -33,7 +33,7 @@ public class Controller implements Initializable {
     @FXML
     public void openAbout(javafx.event.ActionEvent actionEvent) throws Exception
     {
-        System.out.println("ASFUIASF");
+
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(getClass().getResource(".././about/about.fxml"));
@@ -45,15 +45,22 @@ public class Controller implements Initializable {
 
     @FXML
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception{
-        Parent root = null;
+
+        AnchorPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource(".././firstMenu/FirstMenu.fxml"));
+            root = FXMLLoader.load(getClass().getResource(".././about/MenuChoices.fxml"));
+            MainPane.add((AnchorPane)root,1,1);
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
         }
-        Scene dashboard = new Scene(root);
-        Stage window=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(dashboard);
-        window.show();
+
+    }
+
+    public void goToDrinks(ActionEvent actionEvent) {
+
+
+    }
+
+    public void goToFood(ActionEvent actionEvent) {
     }
 }
