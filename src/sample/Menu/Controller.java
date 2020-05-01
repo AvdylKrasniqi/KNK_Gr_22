@@ -22,6 +22,7 @@ public class Controller implements Initializable {
     private static final String username = "art_knk";
     private static final String password = "OyRKDSix1BfEk0+vqgKqTbOqxYz3RVsX7R0HOL7+";
 
+    //db info
     private Connection conn;
     @FXML
     private TableView<DbMenu> tableview;
