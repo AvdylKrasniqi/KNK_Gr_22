@@ -5,18 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/albcaffe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/albcaffe.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/Food/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/Food/Food.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/Food/FoodController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/Food/FoodController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/DbMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/DbMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/Menu/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/about/About.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/about/AboutController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/about/about.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/about/about.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/firstMenu/FirstMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/firstMenu/FirstMenu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/firstMenu/FirstMenuController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/kamarieri/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/albcaffe/sample/login/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/albcaffe/sample/login/Login.class" afterDir="false" />
@@ -109,7 +102,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/mysql-connector-java-5.1.48" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysql-connector-java-5.1.48/mysql-connector-java-5.1.48" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -154,6 +147,19 @@
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
+    <configuration type="Application" factoryName="Application" temporary="true">
+      <module name="albcaffe" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.firstMenu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="About" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.about.About" />
       <module name="albcaffe" />
@@ -185,7 +191,7 @@
     <configuration name="Food" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.Food.Food" />
       <module name="albcaffe" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.Food.*" />
@@ -199,7 +205,7 @@
     <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.login.Login" />
       <module name="albcaffe" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.login.*" />
@@ -213,7 +219,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.kamarieri.Main" />
       <module name="albcaffe" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.*" />
@@ -229,7 +235,7 @@
     <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.Menu.Menu" />
       <module name="albcaffe" />
-      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/IdeaProjects/openjfx-11.0.2_linux-x64_bin-sdk/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sample.Menu.*" />
@@ -242,6 +248,20 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="kamarieriAbout" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.kamarieriAbout" />
+      <module name="albcaffe" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\Rinor\Desktop\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.about.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -281,17 +301,17 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Login" />
       <item itemvalue="Application.Menu" />
-      <item itemvalue="Application.FirstMenu" />
+      <item itemvalue="Application." />
       <item itemvalue="Application.Food" />
-      <item itemvalue="Application.About" />
+      <item itemvalue="Application.kamarieriAbout" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Login" />
-        <item itemvalue="Application.About" />
+        <item itemvalue="Application.kamarieriAbout" />
+        <item itemvalue="Application." />
         <item itemvalue="Application.Food" />
         <item itemvalue="Application.Menu" />
-        <item itemvalue="Application.FirstMenu" />
       </list>
     </recent_temporary>
   </component>
@@ -329,6 +349,7 @@
       <workItem from="1588345547771" duration="5000" />
       <workItem from="1588345625375" duration="2976000" />
       <workItem from="1588348993960" duration="318000" />
+      <workItem from="1588349622972" duration="1959000" />
     </task>
     <servers />
   </component>
@@ -351,10 +372,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="311" width="524" height="491" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1587916147359" />
-    <state x="332" y="67" width="1585" height="860" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588346049157">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="318" y="144" width="789" height="549" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588349872550">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="318" y="144" width="789" height="536" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588179017973" />
+    <state x="318" y="144" width="789" height="549" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588349872550" />
     <state x="332" y="67" width="1585" height="860" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1588346049157" />
     <state x="612" y="182" width="327" height="464" key="#com.intellij.ide.util.MemberChooser" timestamp="1588178837421">
       <screen x="0" y="0" width="1536" height="824" />
@@ -362,38 +383,46 @@
     <state x="612" y="182" width="327" height="464" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1588178837421" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586637354983" />
     <state x="805" y="259" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1587922204050" />
-    <state x="655" y="543" width="406" height="200" key="DetectedRootsChooserDialog" timestamp="1588345682207">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="443" y="209" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588349813638">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="487" y="404" width="406" height="200" key="DetectedRootsChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1588178577858" />
+    <state x="443" y="209" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1588349813638" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588350449055">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588350449055" />
+    <state x="487" y="404" width="406" height="200" key="DetectedRootsChooserDialog" timestamp="1588349704441">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="487" y="404" width="406" height="200" key="DetectedRootsChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1588349704441" />
     <state x="655" y="543" width="489" height="228" key="DetectedRootsChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1588345682207" />
-    <state x="532" y="397" width="735" height="520" key="FileChooserDialogImpl" timestamp="1588345680080">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="385" y="290" width="735" height="520" key="FileChooserDialogImpl" timestamp="1588349703299">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="290" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588178586821" />
+    <state x="385" y="290" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588349703299" />
     <state x="532" y="397" width="735" height="520" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1588345680080" />
-    <state width="1807" height="184" key="GridCell.Tab.0.bottom" timestamp="1588348925743">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom" timestamp="1588351503941">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="107" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588180823178" />
+    <state width="1493" height="2" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588351503941" />
     <state width="1877" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
     <state width="1807" height="184" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1588348925743" />
-    <state width="1807" height="184" key="GridCell.Tab.0.center" timestamp="1588348925742">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center" timestamp="1588351503941">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="107" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588180823178" />
+    <state width="1493" height="2" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588351503941" />
     <state width="1877" height="283" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
     <state width="1807" height="184" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1588348925742" />
-    <state width="1807" height="184" key="GridCell.Tab.0.left" timestamp="1588348925742">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1493" height="2" key="GridCell.Tab.0.left" timestamp="1588351503941">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="107" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588180823178" />
+    <state width="1493" height="2" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588351503941" />
     <state width="1877" height="283" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
     <state width="1807" height="184" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1588348925742" />
-    <state width="1807" height="184" key="GridCell.Tab.0.right" timestamp="1588348925743">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state width="1493" height="2" key="GridCell.Tab.0.right" timestamp="1588351503941">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="107" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588180823178" />
+    <state width="1493" height="2" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588351503941" />
     <state width="1877" height="283" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586644494293" />
     <state width="1807" height="184" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1588348925743" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1588179037493">
@@ -416,10 +445,10 @@
     </state>
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1588179037492" />
     <state width="1807" height="340" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587925336454" />
-    <state x="837" y="228" width="1024" height="852" key="SettingsEditor" timestamp="1588345858350">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="498" y="0" width="1024" height="852" key="SettingsEditor" timestamp="1588349708190">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="638" y="157" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588178590065" />
+    <state x="498" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588349708190" />
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586634362893" />
     <state x="837" y="228" width="1024" height="852" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1588345858350" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1586869499547">

@@ -46,9 +46,10 @@ public class Controller implements Initializable {
     @FXML
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception{
 
+
         AnchorPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource(".././about/MenuChoices.fxml"));
+            root = FXMLLoader.load(getClass().getResource(".././partials/MenuChoices.fxml"));
             MainPane.add((AnchorPane)root,1,1);
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
@@ -56,11 +57,34 @@ public class Controller implements Initializable {
 
     }
 
-    public void goToDrinks(ActionEvent actionEvent) {
+    @FXML
+    public void goToDrinks(ActionEvent actionEvent)
+    {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("./../Menu/Menu.fxml"));
 
-
+        } catch (IOException e) {
+            System.out.println("Path eshte gabim");
+        }
+        Scene dashboard = new Scene(root);
+         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(dashboard);
+        window.show();
     }
 
-    public void goToFood(ActionEvent actionEvent) {
+    @FXML
+    public void goToFood(ActionEvent actionEvent)
+    {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("./../Food/Food.fxml"));
+        } catch (IOException e) {
+            System.out.println("Path eshte gabim");
+        }
+        Scene dashboard = new Scene(root);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(dashboard);
+        window.show();
     }
 }
