@@ -27,9 +27,9 @@ import java.util.ResourceBundle;
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements Initializable {
     public static int numberOfTabels;
-  // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte 
-  private HashMap<int[],Character> occupiedTables = new HashMap<>();
-
+  // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
+    int currentAnchorPane = 0;
+    private boolean [][] occupiedTable = new boolean[5][5];
     private HashMap<String,HashMap> table = new HashMap<>();
     @FXML
     private GridPane tablesGrid;
@@ -43,61 +43,73 @@ public class Controller implements Initializable {
     private GridPane MainPane;
     @FXML
     private ToggleButton addToggle;
+    @FXML
+    private AnchorPane switchMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeOccupancy();
 
-        System.out.println(occupiedTables.toString());
+//        System.out.println(occupiedTables.toString());
     }
 
     @FXML
     public void openAbout(javafx.event.ActionEvent actionEvent) throws Exception {
+        loadAnchor(".././about/about.fxml");
+        currentAnchorPane = 3;
+    }
 
+    public void loadAnchor(String path) throws Exception
+    {
+//        MainPane.getChildren().removeIf(node -> GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0);
+        if (currentAnchorPane !=0)
+        {
+            switch (currentAnchorPane) {
+                case 1:
+                    MainPane.getChildren().remove(tablePane);
+                    break;
+                case 2:
+                    MainPane.getChildren().remove(switchMenu);
+                    break;
+                case 3:
+                    MainPane.getChildren().remove(aboutPane);
+                    break;
+                default:
+                    return;
+
+            }
+        }
         AnchorPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource(".././about/about.fxml"));
+            root = FXMLLoader.load(getClass().getResource(path));
             MainPane.add((AnchorPane) root, 1, 1);
 
         } catch (IOException e) {
-            System.out.println("Path eshte gabim");
+            System.out.println("Pathi eshte gabim");
         }
-    }
 
+    }
 
     @FXML
     public void openTables(javafx.event.ActionEvent actionEvent) throws Exception {
 
-        AnchorPane root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(".././partials/Tables.fxml"));
-            MainPane.add((AnchorPane) root, 1, 1);
-
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+        loadAnchor(".././partials/Tables.fxml");
+        currentAnchorPane = 1;
     }
 
 
     @FXML
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception {
 
-
-        AnchorPane root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(".././partials/MenuChoices.fxml"));
-            MainPane.add((AnchorPane) root, 1, 1);
-        } catch (IOException e) {
-            System.out.println("Path eshte gabim");
-        }
-
+        loadAnchor(".././partials/MenuChoices.fxml");
+        currentAnchorPane = 2;
     }
 
-    @FXML
-    public void goToDrinks(ActionEvent actionEvent) {
+    public void loadView(ActionEvent actionEvent, String path)
+    {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("./../Menu/Menu.fxml"));
+            root = FXMLLoader.load(getClass().getResource(path));
 
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
@@ -109,17 +121,16 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void goToFood(ActionEvent actionEvent) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("./../Food/Food.fxml"));
-        } catch (IOException e) {
-            System.out.println("Path eshte gabim");
-        }
-        Scene dashboard = new Scene(root);
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(dashboard);
-        window.show();
+    public void goToDrinks(ActionEvent actionEvent) throws Exception {
+
+        loadView(actionEvent,"./../Menu/Menu.fxml");
+    }
+
+    @FXML
+    public void goToFood(ActionEvent actionEvent) throws Exception {
+
+        loadView(actionEvent,"./../Food/Food.fxml");
+
     }
 
     public static int[] getGridLocation(double x, double y) {
@@ -137,24 +148,19 @@ public class Controller implements Initializable {
         {
             for(int j=0;j<5;j++)
             {
-                int a[]={i,j};
-                occupiedTables.put(a,'n');
-
+                occupiedTable[i][j] = false;
             }
         }
     }
-
-
 
     @FXML
     public void addNewTable(MouseEvent event) {
         if (addToggle.isSelected()) {
             int[] gridLocation = getGridLocation(event.getX(), event.getY());
             System.out.println("GridLocation" + gridLocation[0] + gridLocation[1]);
-            System.out.println(occupiedTables.get(gridLocation));
-            if(occupiedTables.containsKey(gridLocation)&&  occupiedTables.get(gridLocation)=='y')
+            if (occupiedTable[gridLocation[0]][gridLocation[1]] == true)
             {
-                return ;
+                return;
             }
             ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
             table.setFitHeight(100);
@@ -164,7 +170,7 @@ public class Controller implements Initializable {
             numberOfTabels++;
             tablesGrid.add(table, gridLocation[0], gridLocation[1]);
             tablesGrid.add(text, gridLocation[0], gridLocation[1]);
-            occupiedTables.replace(gridLocation,'n');
+            occupiedTable[gridLocation[0]][gridLocation[1]] = true;
         }
     }
 
