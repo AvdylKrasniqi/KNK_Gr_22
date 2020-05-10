@@ -1,5 +1,6 @@
 package sample.kamarieri;
 
+import StateClasses.Tables;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,10 +28,10 @@ import java.util.ResourceBundle;
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements Initializable {
     public static int numberOfTabels;
-  // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
+    // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
-    private boolean [][] occupiedTable = new boolean[5][5];
-    private HashMap<String,HashMap> table = new HashMap<>();
+    private boolean[][] occupiedTable = new boolean[5][5];
+    private HashMap<String, Tables> allTables = new HashMap<>();
     @FXML
     private GridPane tablesGrid;
     @FXML
@@ -55,29 +56,23 @@ public class Controller implements Initializable {
 
     @FXML
     public void openAbout(javafx.event.ActionEvent actionEvent) throws Exception {
+        if (currentAnchorPane == 3)
+            return;
         loadAnchor(".././about/about.fxml");
         currentAnchorPane = 3;
     }
 
-    public void loadAnchor(String path) throws Exception
-    {
-//        MainPane.getChildren().removeIf(node -> GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0);
-        if (currentAnchorPane !=0)
-        {
-            switch (currentAnchorPane) {
-                case 1:
-                    MainPane.getChildren().remove(tablePane);
-                    break;
-                case 2:
-                    MainPane.getChildren().remove(switchMenu);
-                    break;
-                case 3:
-                    MainPane.getChildren().remove(aboutPane);
-                    break;
-                default:
-                    return;
+    public void removeAnchor() {
 
-            }
+     MainPane.getChildren().remove(4);
+
+
+    }
+
+
+    public void loadAnchor(String path) throws Exception {
+        if (currentAnchorPane != 0) {
+            removeAnchor();
         }
         AnchorPane root = null;
         try {
@@ -92,7 +87,8 @@ public class Controller implements Initializable {
 
     @FXML
     public void openTables(javafx.event.ActionEvent actionEvent) throws Exception {
-
+        if (currentAnchorPane == 1)
+            return;
         loadAnchor(".././partials/Tables.fxml");
         currentAnchorPane = 1;
     }
@@ -100,13 +96,13 @@ public class Controller implements Initializable {
 
     @FXML
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception {
-
+        if (currentAnchorPane == 2)
+            return;
         loadAnchor(".././partials/MenuChoices.fxml");
         currentAnchorPane = 2;
     }
 
-    public void loadView(ActionEvent actionEvent, String path)
-    {
+    public void loadView(ActionEvent actionEvent, String path) {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource(path));
@@ -123,13 +119,13 @@ public class Controller implements Initializable {
     @FXML
     public void goToDrinks(ActionEvent actionEvent) throws Exception {
 
-        loadView(actionEvent,"./../Menu/Menu.fxml");
+        loadView(actionEvent, "./../Menu/Menu.fxml");
     }
 
     @FXML
     public void goToFood(ActionEvent actionEvent) throws Exception {
 
-        loadView(actionEvent,"./../Food/Food.fxml");
+        loadView(actionEvent, "./../Food/Food.fxml");
 
     }
 
@@ -142,12 +138,9 @@ public class Controller implements Initializable {
 
     }
 
-    public  void initializeOccupancy()
-    {
-        for(int i=0;i<5;i++)
-        {
-            for(int j=0;j<5;j++)
-            {
+    public void initializeOccupancy() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 occupiedTable[i][j] = false;
             }
         }
@@ -158,8 +151,8 @@ public class Controller implements Initializable {
         if (addToggle.isSelected()) {
             int[] gridLocation = getGridLocation(event.getX(), event.getY());
             System.out.println("GridLocation" + gridLocation[0] + gridLocation[1]);
-            if (occupiedTable[gridLocation[0]][gridLocation[1]] == true)
-            {
+            if (occupiedTable[gridLocation[0]][gridLocation[1]] == true) {
+               // tash nuk duhet return po open
                 return;
             }
             ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
@@ -171,6 +164,8 @@ public class Controller implements Initializable {
             tablesGrid.add(table, gridLocation[0], gridLocation[1]);
             tablesGrid.add(text, gridLocation[0], gridLocation[1]);
             occupiedTable[gridLocation[0]][gridLocation[1]] = true;
+            this.allTables.put("Tavolina "+numberOfTabels,new Tables());
+
         }
     }
 
