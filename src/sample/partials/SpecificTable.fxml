@@ -14,7 +14,7 @@
    <children>
       <VBox prefHeight="551.0" prefWidth="613.0">
          <children>
-            <Label text="Specific Table">
+            <Label fx:id="tableTitle" text="Specific Table">
                <font>
                   <Font name="Ubuntu Bold" size="30.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Insets left="260.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Details">
+            <Button mnemonicParsing="false" onMouseClicked="#cleanThings" text="Details">
                <VBox.margin>
                   <Insets bottom="-25.0" left="180.0" top="30.0" />
                </VBox.margin>

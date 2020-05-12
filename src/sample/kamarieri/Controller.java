@@ -1,6 +1,7 @@
 package sample.kamarieri;
 
 import StateClasses.Tables;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,11 +18,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import sample.PartialControllers.TableScreenController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -31,7 +35,8 @@ public class Controller implements Initializable {
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
-    private HashMap<String, Tables> allTables = new HashMap<>();
+    //      private ArrayList<Tables> Tavolinat= new ArrayList<>(25);
+    private HashMap<Integer, Tables> Tavolinat = new HashMap<>();
     @FXML
     private GridPane tablesGrid;
     @FXML
@@ -46,6 +51,10 @@ public class Controller implements Initializable {
     private ToggleButton addToggle;
     @FXML
     private AnchorPane switchMenu;
+    @FXML
+    private ToggleButton updateToggle;
+    @FXML
+    private ToggleButton deleteToggle;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,7 +73,7 @@ public class Controller implements Initializable {
 
     public void removeAnchor() {
 
-     MainPane.getChildren().remove(4);
+        MainPane.getChildren().remove(4);
 
 
     }
@@ -102,10 +111,29 @@ public class Controller implements Initializable {
         currentAnchorPane = 2;
     }
 
-    public void loadView(ActionEvent actionEvent, String path) {
+
+    public void loadViewData(String path, int id) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root = (Parent) loader.load();
+
+
+        Scene newScene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.setScene(newScene);
+        newStage.show();
+        TableScreenController ctrl = loader.getController();
+        ctrl.setTable(this.Tavolinat.get(id));
+
+
+    }
+
+
+    public void loadView(Event actionEvent, String path) {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource(path));
+
 
         } catch (IOException e) {
             System.out.println("Path eshte gabim");
@@ -147,12 +175,11 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void addNewTable(MouseEvent event) {
+    public void addNewTable(MouseEvent event) throws IOException {
         if (addToggle.isSelected()) {
             int[] gridLocation = getGridLocation(event.getX(), event.getY());
             System.out.println("GridLocation" + gridLocation[0] + gridLocation[1]);
-            if (occupiedTable[gridLocation[0]][gridLocation[1]] == true) {
-               // tash nuk duhet return po open
+            if (occupiedTable[gridLocation[0]][gridLocation[1]]) {
                 return;
             }
             ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
@@ -164,13 +191,38 @@ public class Controller implements Initializable {
             tablesGrid.add(table, gridLocation[0], gridLocation[1]);
             tablesGrid.add(text, gridLocation[0], gridLocation[1]);
             occupiedTable[gridLocation[0]][gridLocation[1]] = true;
-            this.allTables.put("Tavolina "+numberOfTabels,new Tables());
+//            this.allTables.put("Tavolina "+numberOfTabels,new Tables());
+
+            this.Tavolinat.put(convertFromGrid(event), new Tables());
+
 
         }
+        if (tableDetails(event)) {
+            if (this.Tavolinat.containsKey(convertFromGrid(event)))
+                loadViewData(".././partials/SpecificTable.fxml", convertFromGrid(event));
+        }
+    }
+
+    public boolean tableDetails(MouseEvent event) {
+        int coordinates[] = getGridLocation(event.getX(), event.getY());
+        return (updateToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]]);
     }
 
     // top right bottom left
     public void addTable(MouseEvent mouseEvent) {
         // duhet me fshi kete shit
     }
+
+    public int convertFromGrid(MouseEvent event) {
+        int coordinates[] = getGridLocation(event.getX(), event.getY());
+        return coordinates[0] * 5 + coordinates[1];
+    }
+
+    public void deleteTable(MouseEvent event) {
+        int coordinates[] = getGridLocation(event.getX(), event.getY());
+        if (deleteToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]])
+            System.out.println("qitu duhet me ndreq");
+
+    }
+
 }

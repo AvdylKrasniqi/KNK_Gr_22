@@ -17,12 +17,12 @@
                   <Insets left="80.0" right="80.0" top="15.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Update">
+            <ToggleButton fx:id="updateToggle" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Update">
                <HBox.margin>
                   <Insets right="80.0" top="15.0" />
                </HBox.margin>
             </ToggleButton>
-            <ToggleButton mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Delete">
+            <ToggleButton fx:id="deleteToggle" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Delete">
                <HBox.margin>
                   <Insets right="80.0" top="15.0" />
                </HBox.margin>
