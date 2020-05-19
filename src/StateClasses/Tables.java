@@ -1,13 +1,14 @@
 package StateClasses;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Tables {
-    
+
     private boolean isOccupied;
     private HashMap<String, Double> products = new HashMap<>();
-    private int totalPrice;
+    private double totalPrice;
     private int capacity;
 
     public Tables() {
@@ -18,6 +19,15 @@ public class Tables {
     public Tables(int capacity) {
         this.capacity = capacity;
         this.isOccupied = false;
+    }
+
+    public void increaseTotalPrice(double price) {
+        this.totalPrice += price;
+    }
+
+
+    public int getCapacity() {
+        return this.capacity;
     }
 
     public boolean getOccupied() {
@@ -37,6 +47,23 @@ public class Tables {
             //TODO: Kuponi Fiskal
         }
         this.products.clear();
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        StringBuilder mesazhi = new StringBuilder();
+        if (this.getOccupied())
+            mesazhi.append("Tavolina eshte e uzurpuar");
+        mesazhi.append("\nTotal price eshte " + this.totalPrice);
+        mesazhi.append("\nProduktet tona jane");
+        for (Map.Entry<String, Double> entry : this.products.entrySet())
+            mesazhi.append("\nSasia:" + entry.getKey()  + " - " + entry.getValue()+" Euro");
+        mesazhi.append("\nNumri i uleseve eshte " + this.capacity);
+        return mesazhi.toString();
+
     }
 
     public void addProduct(String name, Double price, int quantity) {

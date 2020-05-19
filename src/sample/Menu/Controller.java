@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import java.sql.*;
-
+import StateClasses.Dbinfo;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,9 +18,9 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    private static final String firstConnection = "jdbc:mysql://185.67.178.114:3306/art_knk_db";
-    private static final String username = "art_knk";
-    private static final String password = "OyRKDSix1BfEk0+vqgKqTbOqxYz3RVsX7R0HOL7+";
+//    private static final String firstConnection = Dbinfo.getConnectionName();
+//    private static final String username = Dbinfo.getConnectionUsername();
+//    private static final String password = Dbinfo.getPassword();
 
     //db info
     private Connection conn;
@@ -176,7 +176,7 @@ public class Controller implements Initializable {
 
 
     private void initDb() throws SQLException {
-        conn = DriverManager.getConnection(firstConnection, username, password);
+        conn = Dbinfo.startConnection();
     }
 
     private ObservableList<DbMenu> getItems() throws Exception {

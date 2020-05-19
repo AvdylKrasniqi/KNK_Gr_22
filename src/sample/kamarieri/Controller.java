@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import sample.PartialControllers.TableScreenController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -78,6 +80,10 @@ public class Controller implements Initializable {
 
     }
 
+    public void changeTable(int id, Tables table)
+    {
+        this.Tavolinat.replace(id,table);
+    }
 
     public void loadAnchor(String path) throws Exception {
         if (currentAnchorPane != 0) {
@@ -112,7 +118,7 @@ public class Controller implements Initializable {
     }
 
 
-    public void loadViewData(String path, int id) throws IOException {
+    public void loadViewData(String path, int id) throws IOException, SQLException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = (Parent) loader.load();
@@ -121,9 +127,13 @@ public class Controller implements Initializable {
         Scene newScene = new Scene(root);
         Stage newStage = new Stage();
         newStage.setScene(newScene);
+        newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.show();
+
+
         TableScreenController ctrl = loader.getController();
         ctrl.setTable(this.Tavolinat.get(id));
+        ctrl.setId(id);
 
 
     }
@@ -175,7 +185,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void addNewTable(MouseEvent event) throws IOException {
+    public void addNewTable(MouseEvent event) throws IOException, SQLException {
         if (addToggle.isSelected()) {
             int[] gridLocation = getGridLocation(event.getX(), event.getY());
             System.out.println("GridLocation" + gridLocation[0] + gridLocation[1]);
