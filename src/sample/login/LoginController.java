@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,7 +26,7 @@ import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.Base64;
 import java.util.ResourceBundle;
-
+import StateClasses.LoggedUser;
 public class LoginController implements Initializable {
 
     private static final String firstConnection = "jdbc:mysql://185.67.178.114:3306/art_knk_db";
@@ -84,15 +83,20 @@ public class LoginController implements Initializable {
         ResultSet password = stmt.executeQuery();
 
         try {
+//            TODO: Mos me kqyr permes password.next() po duhet me ndryshu ne result.next() se edhe password ka mu dergu si field ne SQL Query.
             if (password.next()) {
                 // masi hala skem usera pe lojna qishtu tani e bojme me hashed
 
-                if (passwordField.getText().contentEquals(password.getString("password")))
+                if (passwordField.getText().contentEquals(password.getString("password"))) {
                     validLogin = true;
+//                TODO: qetu duhet me ndreq id, kur te logohet me ja marr  result.id & result.status
+//                 Nqet rast po boj assume qe useri osht admin.
+//                TODO: Edhe qetu osht mir me marr result.username se ka mundesi qe munet me exploit gjate kohes sa osht tu ndodh kontrollimi me ndrru tekstin ne usernameField
+                    LoggedUser.setUser(-999, usernameField.getText(), true);
+                }
                 else {
                     throw new Exception("Incorrect login.");
                 }
-
             }
 
         } catch (Exception e) {

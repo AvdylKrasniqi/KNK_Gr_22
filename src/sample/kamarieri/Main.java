@@ -1,9 +1,19 @@
+
+//TODO: Nese pahiri ju qet error kqyrni Run Configurations se mu po mi ndryshon path te JavaFX.
+//TODO: Nese pahiri ju qet error kqyrni Run Configurations se mu po mi ndryshon path te JavaFX.
+//TODO: Nese pahiri ju qet error kqyrni Run Configurations se mu po mi ndryshon path te JavaFX.
+//TODO: Nese pahiri ju qet error kqyrni Run Configurations se mu po mi ndryshon path te JavaFX.
+
+
 package sample.kamarieri;
 
+import StateClasses.LoggedUser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -37,10 +47,15 @@ public class Main extends Application {
 
 
         primaryStage.setScene(new Scene(root, 800, 600));
-   primaryStage.setResizable(false);
+       primaryStage.setResizable(false);
         primaryStage.show();
-
-
+        Button btn_About = (Button) root.lookup("#AboutTab");
+//        TODO: po supozoj qe osht kamarier
+        LoggedUser.setUser(-1, "avdyl", false);
+        if(!LoggedUser.isAdmin()) {
+            //Po provoj veq me set Visbile edhe pse nfakt duhet me bo Box.remove(elementi)
+            btn_About.setVisible(false);
+        }
     }
 
 
