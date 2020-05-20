@@ -37,7 +37,7 @@
                   </Text>
                </children>
             </Pane>
-            <Pane prefHeight="565.0" prefWidth="201.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+            <Pane fx:id="MyPane" prefHeight="565.0" prefWidth="201.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
                <children>
                   <Button fx:id="AboutTab" layoutX="54.0" layoutY="428.0" mnemonicParsing="false" onAction="#openAbout" prefHeight="33.0" prefWidth="133.0" stylesheets="@../css/style.css" text="About">
                      <font>

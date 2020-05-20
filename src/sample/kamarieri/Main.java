@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -48,13 +49,14 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root, 800, 600));
        primaryStage.setResizable(false);
+
         primaryStage.show();
         Button btn_About = (Button) root.lookup("#AboutTab");
 //        TODO: po supozoj qe osht kamarier
         LoggedUser.setUser(-1, "avdyl", false);
+        Pane myPane = (Pane) root.lookup("#MyPane");
         if(!LoggedUser.isAdmin()) {
-            //Po provoj veq me set Visbile edhe pse nfakt duhet me bo Box.remove(elementi)
-            btn_About.setVisible(false);
+            myPane.getChildren().remove(btn_About);
         }
     }
 
