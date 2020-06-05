@@ -182,7 +182,7 @@ public class TableScreenController implements BigController, Initializable {
         try {
             getMenuItems();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+           this.show(e);
         }
 
     }

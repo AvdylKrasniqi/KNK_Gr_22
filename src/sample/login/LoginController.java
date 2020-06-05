@@ -1,23 +1,17 @@
 package sample.login;
 
+import StateClasses.BigController;
+import StateClasses.Dbinfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import sample.Menu.Controller;
-
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -26,12 +20,11 @@ import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.Base64;
 import java.util.ResourceBundle;
-import StateClasses.LoggedUser;
-public class LoginController implements Initializable {
 
-    private static final String firstConnection = "jdbc:mysql://185.67.178.114:3306/art_knk_db";
-    private static final String username = "art_knk";
-    private static final String password = "OyRKDSix1BfEk0+vqgKqTbOqxYz3RVsX7R0HOL7+";
+import StateClasses.LoggedUser;
+
+public class LoginController implements BigController, Initializable {
+
     private Connection conn;
 
     @FXML
@@ -48,7 +41,7 @@ public class LoginController implements Initializable {
         try {
             initDb();
         } catch (SQLException e) {
-            e.printStackTrace();
+            this.show(e);
         }
     }
 
@@ -67,7 +60,7 @@ public class LoginController implements Initializable {
 
 
     private void initDb() throws SQLException {
-        conn = DriverManager.getConnection(firstConnection, username, password);
+        conn = Dbinfo.startConnection();
     }
 
     @FXML
@@ -92,9 +85,8 @@ public class LoginController implements Initializable {
 //                TODO: qetu duhet me ndreq id, kur te logohet me ja marr  result.id & result.status
 //                 Nqet rast po boj assume qe useri osht admin.
 //                TODO: Edhe qetu osht mir me marr result.username se ka mundesi qe munet me exploit gjate kohes sa osht tu ndodh kontrollimi me ndrru tekstin ne usernameField
-                    LoggedUser.setUser(-999, usernameField.getText(), true);
-                }
-                else {
+                    LoggedUser.setUser(-999, usernameField.getText(), LoggedUser.Status.Admin);
+                } else {
                     throw new Exception("Incorrect login.");
                 }
             }
@@ -102,30 +94,12 @@ public class LoginController implements Initializable {
         } catch (Exception e) {
 
 
-            Controller.printError(e);
+            this.show(e);
         }
 
         if (validLogin) {
 
-            Parent root = null;
-            try {
-
-
-                root = FXMLLoader.load(getClass().getResource("./../kamarieri/sample.fxml"));
-
-            } catch (IOException e) {
-                System.out.println("Path eshte gabim");
-
-            }
-
-            Scene dashboard = new Scene(root);
-
-            //This line gets the Stage Information
-            //here we get the stage from event action and setting the root element in the scene and display scene with stage object (window) which is retrieved from action event
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(dashboard);
-
-            window.show();
+            this.loadView(event, ".././kamarieri/sample.fxml");
         }
     }
 

@@ -1,26 +1,24 @@
 package sample.Menu;
 
+import StateClasses.BigController;
+import StateClasses.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import java.sql.*;
+
 import StateClasses.Dbinfo;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller implements BigController, MenuController,Initializable {
 
-//    private static final String firstConnection = Dbinfo.getConnectionName();
-//    private static final String username = Dbinfo.getConnectionUsername();
-//    private static final String password = Dbinfo.getPassword();
 
     //db info
     private Connection conn;
@@ -46,12 +44,11 @@ public class Controller implements Initializable {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         try {
-            initDb();
-            tableview.setItems(getItems());
-//price MenuType Title
+
+            tableview.setItems(getItems("drink"));
 
         } catch (Exception e) {
-            printError(e);
+            this.show(e);
 
         }
 
@@ -60,7 +57,7 @@ public class Controller implements Initializable {
         {
             if (_new == null)
                 return;
-            menuToUI(_new);
+            menuToUI(_new,idField,titleField,priceField);
 
         });
 
@@ -70,139 +67,50 @@ public class Controller implements Initializable {
     @FXML
     private void onCreateButtonClick(ActionEvent event) {
         try {
-            DbMenu fromUI = menuFromUI();
+            DbMenu fromUI = menuFromUI(idField,titleField,priceField);
             DbMenu create = createItem(fromUI);
             tableview.getItems().add(create);
-            clearUI();
+            clearUI(idField,titleField,priceField);
 
         } catch (Exception e) {
-            printError(e);
+            this.show(e);
         }
     }
 
     @FXML
     private void onUpdateButtonClick(ActionEvent event) {
-       try
-       {
-           DbMenu form=menuFromUI();
-           updateItem(form);
-           DbMenu selected=tableview.getSelectionModel().getSelectedItem();
-           selected.setTitle(form.getTitle());
-           selected.setPrice(form.getPrice());
-           tableview.refresh();
-           tableview.getSelectionModel().clearSelection();
-            clearUI();
-       }
-       catch(Exception e)
-       {
-        printError(e);
-       }
+        try {
+            DbMenu form = menuFromUI(idField,titleField,priceField);
+            updateItem(form);
+            DbMenu selected = tableview.getSelectionModel().getSelectedItem();
+            selected.setTitle(form.getTitle());
+            selected.setPrice(form.getPrice());
+            tableview.refresh();
+            tableview.getSelectionModel().clearSelection();
+            clearUI(idField,titleField,priceField);
+        } catch (Exception e) {
+            this.show(e);
+        }
 
     }
 
     @FXML
     private void onRemoveButtonClick(ActionEvent event) {
-        try
-        {
-            DbMenu tobeExecuted=tableview.getSelectionModel().getSelectedItem();
+        try {
+            DbMenu tobeExecuted = tableview.getSelectionModel().getSelectedItem();
             removeItem(tobeExecuted.getId());
             tableview.getSelectionModel().clearSelection();
             tableview.getItems().remove(tobeExecuted);
-            clearUI();
+            clearUI(idField,titleField,priceField);
 
-        }
-        catch(Exception e)
-        {
-            printError(e);
+        } catch (Exception e) {
+            this.show(e);
         }
 
     }
-//INSERT INTO `art_knk_db`.`Menu` (`price`, `MenuType`, `Title`) VALUES ('8', 'drink', 'arsa');
-
-    private DbMenu createItem(DbMenu menu) throws Exception {
-        Statement stmt = conn.createStatement();
-        String sql = String.format("INSERT INTO Menu (price,MenuType,Title) values(%f,'drink','%s')", menu.getPrice(), menu.getTitle());
-        int affectedRows = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-        if (affectedRows <= 0)
-            throw new Exception("No row created");
-
-        ResultSet res = stmt.getGeneratedKeys();
-        if (res.next()) {
-            int id = res.getInt(1);
-            return new DbMenu(id, menu.getPrice(), menu.getTitle());
-        }
-        return null;
-    }
-
-    private void clearUI() {
-        idField.setText("");
-        titleField.setText("");
-        priceField.setText("");
-
-    }
-
-    public static void printError(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(e.toString());
-        alert.showAndWait();
-    }
-
-    private void removeItem(int id ) throws Exception {
-        String sql="DELETE FROM Menu where MenuId=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1,id);
-
-    int affectedRows=stmt.executeUpdate();
-    if(affectedRows!=1)
-        throw new Exception("Gabime ne fshirje(delete)");
-    }
-
-    private DbMenu menuFromUI() {
-        String idText = idField.getText();
-        int id = idText.length() > 0 ? Integer.parseInt(idText) : -1;
-        String titleText = titleField.getText();
-        String priceText = priceField.getText();
-        double price = Double.parseDouble(priceText);
-        return new DbMenu(id, price, titleText);
-
-    }
-
-    private void menuToUI(DbMenu menu) {
-        idField.setText(Integer.toString(menu.getId()));
-        titleField.setText(menu.getTitle());
-        priceField.setText(Double.toString(menu.getPrice()));
-
-    }
 
 
-    private void initDb() throws SQLException {
-        conn = Dbinfo.startConnection();
-    }
 
-    private ObservableList<DbMenu> getItems() throws Exception {
-        ObservableList<DbMenu> items = FXCollections.observableArrayList();
-        Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery("SELECT * FROM Menu where MenuType='drink' ");
-        while (res.next()) {
-            int id = res.getInt(1);
-            Double price = res.getDouble("price");
-            String title = res.getString("Title");
-            items.add(new DbMenu(id, price, title));
-        }
-        return items;
 
-    }
 
-    private void updateItem(DbMenu menu) throws Exception {
-        String sql = "UPDATE Menu SET Title=?,price=? WHERE MenuId=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, menu.getTitle());
-        stmt.setDouble(2, menu.getPrice());
-        stmt.setInt(3, menu.getId());
-
-        int affectedRows=stmt.executeUpdate();
-        if(affectedRows!=1)
-            throw new Exception("Gabim ne update ");
-
-    }
 }

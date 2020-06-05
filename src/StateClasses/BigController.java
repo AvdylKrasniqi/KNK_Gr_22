@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.PartialControllers.TableScreenController;
@@ -52,7 +53,11 @@ public interface  BigController {
 
 
     }
-
-
+    default public  void show(Exception e)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
 
 }

@@ -1,8 +1,7 @@
 package StateClasses;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.xml.transform.Result;
+import java.sql.*;
 
 public class Dbinfo {
     // duhet options qitu
@@ -11,17 +10,28 @@ public class Dbinfo {
     private static final String username = "art_knk";
     private static final String password = "OyRKDSix1BfEk0+vqgKqTbOqxYz3RVsX7R0HOL7+";
 
-    public static String getConnectionName()
-    {
+
+    public static ResultSet executeQuery(String query) throws SQLException {
+        Connection con = startConnection();
+        PreparedStatement stmt =con.prepareStatement(query) ;
+    ResultSet results = stmt.executeQuery();
+        return results;
+    }
+        
+//    public static ResultSet executeIdQuery(String query,int id )
+//    {
+//
+//    }
+
+    public static String getConnectionName() {
         return Dbinfo.firstConnection;
     }
 
-    public static String getConnectionUsername()
-    {
+    public static String getConnectionUsername() {
         return Dbinfo.username;
     }
-    public static String getPassword()
-    {
+
+    public static String getPassword() {
         return Dbinfo.password;
     }
 

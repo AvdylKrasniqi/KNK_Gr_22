@@ -24,7 +24,6 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import sample.PartialControllers.TableScreenController;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -75,8 +74,9 @@ public class Controller implements BigController, Initializable {
     }
 
     public void removeAnchor() {
-
+// krim kunder njerezimit po spo di qysh leshi me ndreq gridpane u heartless bitch
         MainPane.getChildren().remove(4);
+
 
 
     }
@@ -95,7 +95,7 @@ public class Controller implements BigController, Initializable {
             MainPane.add((AnchorPane) root, 1, 1);
 
         } catch (IOException e) {
-            System.out.println("Pathi eshte gabim");
+           this.show(e);
         }
 
     }
@@ -197,7 +197,7 @@ public class Controller implements BigController, Initializable {
         } else if (deleteTable(event)) {
             int[] coordinates = getGridLocation(event.getX(), event.getY());
             this.Tavolinat.replace(convertFromGrid(event), null);
-           // qitu duhet 1 line me fshi GUI side
+            // qitu duhet 1 line me fshi GUI side
 
         }
     }
@@ -221,8 +221,7 @@ public class Controller implements BigController, Initializable {
         int coordinates[] = getGridLocation(event.getX(), event.getY());
         return (deleteToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]]);
 
-//            this.Tavolinat.replace(convertFromGrid(event),null);
-//            MainPane.getChildren().remove(coordinates[0],coordinates[1]);
+
     }
 
 }
