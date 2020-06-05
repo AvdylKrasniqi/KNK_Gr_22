@@ -63,12 +63,12 @@
                   <Insets left="260.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#cleanThings" text="Details">
+            <Button mnemonicParsing="false" onAction="#goToDetails" text="Details">
                <VBox.margin>
                   <Insets bottom="-25.0" left="180.0" top="30.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Clear Table">
+            <Button mnemonicParsing="false" onAction="#clearTable" text="Clear Table">
                <VBox.margin>
                   <Insets left="300.0" />
                </VBox.margin>

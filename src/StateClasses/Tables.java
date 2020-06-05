@@ -42,15 +42,14 @@ public class Tables {
 
     public void clearTable() {
         this.isOccupied = false;
-        for (String key : products.keySet()) {
-            totalPrice += products.get(key);
-            //TODO: Kuponi Fiskal
-        }
         this.products.clear();
     }
 
 
-
+public  HashMap getProducts()
+{
+    return this.products;
+}
 
     @Override
     public String toString() {
@@ -65,7 +64,7 @@ public class Tables {
         return mesazhi.toString();
 
     }
-
+//  this.table.addProduct(quantity +" " + currentItem, price, quantity);
     public void addProduct(String name, Double price, int quantity) {
         this.products.put(name, price * quantity);
     }

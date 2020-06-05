@@ -1,5 +1,6 @@
 package sample.kamarieri;
 
+import StateClasses.BigController;
 import StateClasses.Tables;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
-public class Controller implements Initializable {
+public class Controller implements BigController, Initializable {
     public static int numberOfTabels;
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
@@ -80,9 +81,8 @@ public class Controller implements Initializable {
 
     }
 
-    public void changeTable(int id, Tables table)
-    {
-        this.Tavolinat.replace(id,table);
+    public void changeTable(int id, Tables table) {
+        this.Tavolinat.replace(id, table);
     }
 
     public void loadAnchor(String path) throws Exception {
@@ -139,21 +139,6 @@ public class Controller implements Initializable {
     }
 
 
-    public void loadView(Event actionEvent, String path) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(path));
-
-
-        } catch (IOException e) {
-            System.out.println("Path eshte gabim");
-        }
-        Scene dashboard = new Scene(root);
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(dashboard);
-        window.show();
-    }
-
     @FXML
     public void goToDrinks(ActionEvent actionEvent) throws Exception {
 
@@ -206,10 +191,14 @@ public class Controller implements Initializable {
             this.Tavolinat.put(convertFromGrid(event), new Tables());
 
 
-        }
-        if (tableDetails(event)) {
+        } else if (tableDetails(event)) {
             if (this.Tavolinat.containsKey(convertFromGrid(event)))
                 loadViewData(".././partials/SpecificTable.fxml", convertFromGrid(event));
+        } else if (deleteTable(event)) {
+            int[] coordinates = getGridLocation(event.getX(), event.getY());
+            this.Tavolinat.replace(convertFromGrid(event), null);
+           // qitu duhet 1 line me fshi GUI side
+
         }
     }
 
@@ -228,11 +217,12 @@ public class Controller implements Initializable {
         return coordinates[0] * 5 + coordinates[1];
     }
 
-    public void deleteTable(MouseEvent event) {
+    public boolean deleteTable(MouseEvent event) {
         int coordinates[] = getGridLocation(event.getX(), event.getY());
-        if (deleteToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]])
-            System.out.println("qitu duhet me ndreq");
+        return (deleteToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]]);
 
+//            this.Tavolinat.replace(convertFromGrid(event),null);
+//            MainPane.getChildren().remove(coordinates[0],coordinates[1]);
     }
 
 }

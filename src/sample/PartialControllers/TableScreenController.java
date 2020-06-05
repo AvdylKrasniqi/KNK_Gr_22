@@ -1,8 +1,10 @@
 package sample.PartialControllers;
 
+import StateClasses.BigController;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import sample.kamarieri.Controller;
 import StateClasses.Tables;
 import javafx.collections.FXCollections;
@@ -29,7 +31,8 @@ import StateClasses.Dbinfo;
 
 import javax.swing.*;
 
-public class TableScreenController implements Initializable {
+
+public class TableScreenController implements BigController, Initializable {
     private int id;
     private Tables table;
     @FXML
@@ -55,6 +58,9 @@ public class TableScreenController implements Initializable {
     @FXML
     private Text orderText;
 
+
+
+
     public void setTable(Tables table) throws SQLException {
         this.table = table;
         this.tableCapacity.setText("Kjo tavoline ka " + this.table.getCapacity() + " karrika");
@@ -68,30 +74,30 @@ public class TableScreenController implements Initializable {
     {
         this.id=id;
     }
-
     @FXML
-    public void cleanThings(ActionEvent event) {
-
-
+    public void clearTable()
+    {
+        this.table.clearTable();
+        this.noCheck.setSelected(true);
+        this.yesCheck.setSelected(false);
     }
 
     @FXML
-    public void openDetails(ActionEvent actionEvent)
-    {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../partials/Details.fxml"));
-        } catch (IOException e) {
-            System.out.println("Path eshte gabim");
-        }
+    public void goToDetails(ActionEvent actionEvent) throws Exception {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Detajet.fxml"));
+        Parent root = loader.load();
+        SpecificTableController ctrl = loader.getController();
+        ctrl.setSpecificProducts(this.table.getProducts());
         Scene dashboard = new Scene(root);
+
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(dashboard);
         window.show();
 
 
     }
-    public double getPrice() throws Exception {
+    public double getPriceId() throws Exception {
         Connection con = Dbinfo.startConnection();
         String sql = "Select price from Menu where id=?";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -144,6 +150,9 @@ public class TableScreenController implements Initializable {
 
     @FXML
     public void addItem(ActionEvent event) throws SQLException {
+        this.table.occupyTable();
+        this.yesCheck.setSelected(true);
+        this.noCheck.setSelected(false);
         String currentItem = (String) menuCombo.getValue();
         if (quantityField.getText().equals("") || validateQuantityField(quantityField.getText()))
             return;
@@ -161,7 +170,7 @@ public class TableScreenController implements Initializable {
 
         } else return;
 
-        this.table.addProduct(quantity +" " + currentItem, price, quantity);
+        this.table.addProduct(currentItem, price, quantity);
         this.table.increaseTotalPrice(price*quantity);
         System.out.println(this.table.toString());
 

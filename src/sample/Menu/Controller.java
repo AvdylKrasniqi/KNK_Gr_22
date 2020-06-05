@@ -48,7 +48,7 @@ public class Controller implements Initializable {
         try {
             initDb();
             tableview.setItems(getItems());
-
+//price MenuType Title
 
         } catch (Exception e) {
             printError(e);
