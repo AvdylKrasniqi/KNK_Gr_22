@@ -17,11 +17,6 @@ public class Dbinfo {
     ResultSet results = stmt.executeQuery();
         return results;
     }
-        
-//    public static ResultSet executeIdQuery(String query,int id )
-//    {
-//
-//    }
 
     public static String getConnectionName() {
         return Dbinfo.firstConnection;

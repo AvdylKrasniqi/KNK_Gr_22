@@ -1,5 +1,7 @@
 package sample.login;
 
+import Helpers.PasswordGenerator;
+import Models.PersonModel;
 import StateClasses.BigController;
 import StateClasses.Dbinfo;
 import javafx.event.ActionEvent;
@@ -38,70 +40,24 @@ public class LoginController implements BigController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            initDb();
-        } catch (SQLException e) {
-            this.show(e);
-        }
+
     }
 
 
-    public String getHashedPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        byte[] hash = factory.generateSecret(spec).getEncoded();
-        Base64.Encoder enc = Base64.getEncoder();
-        return enc.encodeToString(hash);
-    }
-
-
-    private void initDb() throws SQLException {
-        conn = Dbinfo.startConnection();
-    }
 
     @FXML
     public void login(ActionEvent event) throws Exception {
-        boolean validLogin = false;
-        String sql = "Select * from Staff where email=?";
+        String email = login_button.getText();
+        String password=passwordField.getText();
+        String saltedPassword=PasswordGenerator.generateSaltedPassword(password);
 
-
-        PreparedStatement stmt = conn.prepareStatement(sql);
-
-        stmt.setString(1, usernameField.getText());
-
-        ResultSet password = stmt.executeQuery();
-
-        try {
-//            TODO: Mos me kqyr permes password.next() po duhet me ndryshu ne result.next() se edhe password ka mu dergu si field ne SQL Query.
-            if (password.next()) {
-                // masi hala skem usera pe lojna qishtu tani e bojme me hashed
-
-                if (passwordField.getText().contentEquals(password.getString("password"))) {
-                    validLogin = true;
-//                TODO: qetu duhet me ndreq id, kur te logohet me ja marr  result.id & result.status
-//                 Nqet rast po boj assume qe useri osht admin.
-//                TODO: Edhe qetu osht mir me marr result.username se ka mundesi qe munet me exploit gjate kohes sa osht tu ndodh kontrollimi me ndrru tekstin ne usernameField
-                    LoggedUser.setUser(-999, usernameField.getText(), LoggedUser.Status.Admin);
-                } else {
-                    throw new Exception("Incorrect login.");
-                }
-            }
-
-        } catch (Exception e) {
-
-
-            this.show(e);
+        if(PasswordGenerator.checkPassword(email,password)) {
+           ResultSet result = PersonModel.returnInfo(email);
+         if(result.next())
+             LoggedUser.setUser(result.getInt("id"),result.getString("name"), PersonModel.finalRole(email));
         }
-
-        if (validLogin) {
-
-            this.loadView(event, ".././kamarieri/sample.fxml");
-        }
+        else
+            throw new Exception("Passwordi eshte gabim");
     }
-
 
 }
