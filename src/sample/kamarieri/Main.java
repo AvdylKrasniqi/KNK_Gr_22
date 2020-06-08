@@ -53,7 +53,7 @@ public class Main extends Application {
         primaryStage.show();
         Button btn_About = (Button) root.lookup("#AboutTab");
 //        TODO: po supozoj qe osht kamarier
-        LoggedUser.setUser(-1, "avdyl", false);
+        LoggedUser.setUser(-1, "avdyl",LoggedUser.Status.Admin);
         Pane myPane = (Pane) root.lookup("#MyPane");
         if(!LoggedUser.isAdmin()) {
             myPane.getChildren().remove(btn_About);

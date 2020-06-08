@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+// prit te qeli apet
+
 
 public interface MenuController {
     default DbMenu createItem(DbMenu menu) throws Exception {

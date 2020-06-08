@@ -2,6 +2,7 @@ package sample.kamarieri;
 
 import StateClasses.BigController;
 import StateClasses.Tables;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +62,6 @@ public class Controller implements BigController, Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeOccupancy();
-
 //        System.out.println(occupiedTables.toString());
     }
 
@@ -169,6 +169,22 @@ public class Controller implements BigController, Initializable {
         }
     }
 
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+
+
     @FXML
     public void addNewTable(MouseEvent event) throws IOException, SQLException {
         if (addToggle.isSelected()) {
@@ -177,6 +193,7 @@ public class Controller implements BigController, Initializable {
             if (occupiedTable[gridLocation[0]][gridLocation[1]]) {
                 return;
             }
+
             ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
             table.setFitHeight(100);
             table.setFitWidth(100);
@@ -184,9 +201,9 @@ public class Controller implements BigController, Initializable {
             text.setPadding(new Insets(70, 0, 0, 20));
             numberOfTabels++;
             tablesGrid.add(table, gridLocation[0], gridLocation[1]);
+
             tablesGrid.add(text, gridLocation[0], gridLocation[1]);
             occupiedTable[gridLocation[0]][gridLocation[1]] = true;
-//            this.allTables.put("Tavolina "+numberOfTabels,new Tables());
 
             this.Tavolinat.put(convertFromGrid(event), new Tables());
 
@@ -197,11 +214,12 @@ public class Controller implements BigController, Initializable {
         } else if (deleteTable(event)) {
             int[] coordinates = getGridLocation(event.getX(), event.getY());
             this.Tavolinat.replace(convertFromGrid(event), null);
-            // qitu duhet 1 line me fshi GUI side
-
+           // komanda e pare e hjek imageview kurse e dyta e hjek label
+            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1],coordinates[0],tablesGrid));
+            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1],coordinates[0],tablesGrid));
         }
+// 
     }
-
     public boolean tableDetails(MouseEvent event) {
         int coordinates[] = getGridLocation(event.getX(), event.getY());
         return (updateToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]]);

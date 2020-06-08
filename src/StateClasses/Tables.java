@@ -10,7 +10,6 @@ public class Tables {
     private HashMap<String, Double> products = new HashMap<>();
     private double totalPrice;
     private int capacity;
-
     public Tables() {
         this.capacity = 4;
         this.isOccupied = false;
