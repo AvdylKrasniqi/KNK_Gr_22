@@ -17,10 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.prefs.BackingStoreException;
+
 public class Main extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
-
+//   3-4 fxml  status qata
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -28,36 +30,23 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("eCaffe");
 
-        /*
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            }
-        });
-
-         */
-
 
         primaryStage.setScene(new Scene(root, 800, 600));
        primaryStage.setResizable(false);
 
         primaryStage.show();
         Button btn_About = (Button) root.lookup("#AboutTab");
-//        TODO: po supozoj qe osht kamarier
-        LoggedUser.setUser(-1, "avdyl",LoggedUser.Status.Admin);
-        Pane myPane = (Pane) root.lookup("#MyPane");
-        if(!LoggedUser.isAdmin()) {
-            myPane.getChildren().remove(btn_About);
-        }
+        primaryStage.setOnCloseRequest(e->{
+            try {
+                LoggedUser.logOut();
+            } catch (BackingStoreException backingStoreException) {
+                System.out.println("eshte bere gje e keqe");
+            }
+        });
+
+
+
+
     }
 
 

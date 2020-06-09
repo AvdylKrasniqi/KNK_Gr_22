@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PersonModel {
     public static String getRole(String email) throws Exception {
@@ -27,32 +30,27 @@ public class PersonModel {
         }
     }
 
-    // problem mi bo krejt 1 funksion se po ki me bind shit po duhet per secilin query funksion
-    public static String statusEnumToString(LoggedUser.Status status) throws Exception {
-        if (status == LoggedUser.Status.Admin)
-            return "Admin";
-        else if (status == LoggedUser.Status.Waiter)
-            return "Kamarier";
-        else throw new Exception("Something went wrong");
-    }
 
 
-
-    public static boolean isUser(String email) throws  Exception
-    {Connection con = Dbinfo.startConnection();
-    String query="Select * FROM Staff where email=?";
-    PreparedStatement stmt=con.prepareStatement(query);
-    stmt.setString(1,email);
+    public static boolean isUser(String email) throws Exception {
+        Connection con = Dbinfo.startConnection();
+        String query = "Select * FROM Staff where email=?";
+        PreparedStatement stmt = con.prepareStatement(query);
+        stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
         return result.next();
     }
-    public static LoggedUser.Status finalRole(String email) throws Exception {
-        String role =getRole(email);
-        return  statusStringToEnum(role);
-    }
+
+
 
 
     public static void insertUser(String name, String email, String password, double salary, String status) throws SQLException, NoSuchProviderException, NoSuchAlgorithmException {
+
+        if(!isValidPassword(password))
+        {
+            System.out.println("Password i papershtatshem");
+            return;
+        }
         Connection con = Dbinfo.startConnection();
         String saltedPassword = PasswordGenerator.generateSaltedPassword(password);
         String query = "insert into Staff(name,email,password,salary,status) values(?,?,?,?,?);";
@@ -67,13 +65,6 @@ public class PersonModel {
 
     }
 
-    public static LoggedUser.Status statusStringToEnum(String status) throws Exception {
-        if (status.equals("Admin"))
-            return LoggedUser.Status.Admin;
-        else if (status.equals("Waiter"))
-            return LoggedUser.Status.Waiter;
-        else throw new Exception("Gabim teknik babo");
-    }
 
     public static void deleteUser(int id) throws Exception {
         Connection con = Dbinfo.startConnection();
@@ -83,6 +74,36 @@ public class PersonModel {
         con.close();
     }
 
+    public static boolean isValidPassword(String password) {
+
+        /*It contains at least 8 characters and at most 20 characters.
+          It contains at least one digit.
+          It contains at least one upper case alphabet.
+          It contains at least one lower case alphabet.
+          It contains at least one special character which includes !@#$%&*()-+=^.
+          It doesn’t contain any white space.*/
+
+
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+
+        Pattern p = Pattern.compile(regex);
+
+
+        if (password == null) {
+            return false;
+        }
+
+
+        Matcher m = p.matcher(password);
+
+
+        return m.matches();
+
+    }
 
     public static void deleteUser(String email) throws SQLException {
         Connection con = Dbinfo.startConnection();
@@ -97,13 +118,14 @@ public class PersonModel {
         Connection conn = Dbinfo.startConnection();
         String query = "Select * from Staff where email=?";
         PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
-        if (result.next()) {
-            conn.close();
+        if(result.next())
             return result;
-        } else {
-            conn.close();
-            throw new Exception("User does not exist");
+        else throw new Exception("katastrof");
+
         }
     }
-}
+
+
+

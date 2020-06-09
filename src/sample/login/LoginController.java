@@ -22,6 +22,7 @@ import java.security.spec.KeySpec;
 import java.sql.*;
 import java.util.Base64;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 import StateClasses.LoggedUser;
 
@@ -40,24 +41,34 @@ public class LoginController implements BigController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        LoggedUser.initialize();
 
     }
 
 
-
     @FXML
     public void login(ActionEvent event) throws Exception {
-        String email = login_button.getText();
-        String password=passwordField.getText();
-        String saltedPassword=PasswordGenerator.generateSaltedPassword(password);
+        try {
+            String email = usernameField.getText();
+            String password = passwordField.getText();
 
-        if(PasswordGenerator.checkPassword(email,password)) {
-           ResultSet result = PersonModel.returnInfo(email);
-         if(result.next())
-             LoggedUser.setUser(result.getInt("id"),result.getString("name"), PersonModel.finalRole(email));
+
+            if (PasswordGenerator.checkPassword(email, password)) {
+                ResultSet result = PersonModel.returnInfo(email);
+                Preferences userPreferences = Preferences.userRoot();
+                userPreferences.putInt("id", result.getInt("id"));
+                userPreferences.put("name", result.getString("name"));
+                userPreferences.put("status", result.getString("status"));
+                userPreferences.putBoolean("loggedIn", true);
+
+
+                this.loadView(event, ".././kamarieri/sample.fxml");
+
+            } else
+                throw new Exception("Passwordi eshte gabim");
+        } catch (Exception e) {
+            this.show(e);
         }
-        else
-            throw new Exception("Passwordi eshte gabim");
     }
 
 }

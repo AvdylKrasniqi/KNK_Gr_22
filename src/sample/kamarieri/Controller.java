@@ -1,6 +1,7 @@
 package sample.kamarieri;
 
 import StateClasses.BigController;
+import StateClasses.LoggedUser;
 import StateClasses.Tables;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -20,17 +21,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import sample.PartialControllers.TableScreenController;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements BigController, Initializable {
@@ -58,11 +62,23 @@ public class Controller implements BigController, Initializable {
     private ToggleButton updateToggle;
     @FXML
     private ToggleButton deleteToggle;
+    @FXML
+    private Button waiterButton;
+    @FXML
+    private ImageView waiterImage;
+    @FXML
+    private Pane menuPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeOccupancy();
-//        System.out.println(occupiedTables.toString());
+
+        try {
+            this.kickOut();
+        } catch (Exception e) {
+            this.show(e);
+        }
+        this.hideTopSecret(menuPane, waiterButton, waiterImage);
+
     }
 
     @FXML
@@ -76,7 +92,6 @@ public class Controller implements BigController, Initializable {
     public void removeAnchor() {
 // krim kunder njerezimit po spo di qysh leshi me ndreq gridpane u heartless bitch
         MainPane.getChildren().remove(4);
-
 
 
     }
@@ -95,7 +110,8 @@ public class Controller implements BigController, Initializable {
             MainPane.add((AnchorPane) root, 1, 1);
 
         } catch (IOException e) {
-           this.show(e);
+//           this.show(e);
+            e.printStackTrace();
         }
 
     }
@@ -113,8 +129,10 @@ public class Controller implements BigController, Initializable {
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception {
         if (currentAnchorPane == 2)
             return;
-        loadAnchor(".././partials/MenuChoices.fxml");
+        loadAnchor("../partials/MenuChoices.fxml");
         currentAnchorPane = 2;
+
+
     }
 
 
@@ -169,12 +187,12 @@ public class Controller implements BigController, Initializable {
         }
     }
 
-    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
         Node result = null;
         ObservableList<Node> childrens = gridPane.getChildren();
 
         for (Node node : childrens) {
-            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
                 result = node;
                 break;
             }
@@ -182,7 +200,6 @@ public class Controller implements BigController, Initializable {
 
         return result;
     }
-
 
 
     @FXML
@@ -214,12 +231,13 @@ public class Controller implements BigController, Initializable {
         } else if (deleteTable(event)) {
             int[] coordinates = getGridLocation(event.getX(), event.getY());
             this.Tavolinat.replace(convertFromGrid(event), null);
-           // komanda e pare e hjek imageview kurse e dyta e hjek label
-            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1],coordinates[0],tablesGrid));
-            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1],coordinates[0],tablesGrid));
+            // komanda e pare e hjek imageview kurse e dyta e hjek label
+            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
+            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
         }
 // 
     }
+
     public boolean tableDetails(MouseEvent event) {
         int coordinates[] = getGridLocation(event.getX(), event.getY());
         return (updateToggle.isSelected() && occupiedTable[coordinates[0]][coordinates[1]]);

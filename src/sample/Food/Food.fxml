@@ -41,14 +41,14 @@
                         </Text>
                     </children>
                 </Pane>
-                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+                <Pane fx:id="menuPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #2f2f2b;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
                     <children>
-                        <Button layoutX="57.0" layoutY="428.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="About">
+                        <Button layoutX="56.0" layoutY="348.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="About">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="57.0" layoutY="344.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Waiter">
+                        <Button fx:id="waiterButton" layoutX="57.0" layoutY="428.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Waiter">
                             <font>
                                 <Font name="Ubuntu Bold" size="13.0" />
                             </font>
@@ -93,7 +93,7 @@
                                 <Image url="@../../../../../../Downloads/waiter-icon-11-256.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="77.0" fitWidth="43.0" layoutX="8.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="77.0" fitWidth="43.0" layoutX="8.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Images/icons8-contacts-128.png" />
                             </image>
@@ -113,7 +113,7 @@
                                 <Image url="@../Images/icons8-table-96.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="13.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="waiterImage" fitHeight="40.0" fitWidth="35.0" layoutX="16.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Images/waiter-icon-11-256.png" />
                             </image>

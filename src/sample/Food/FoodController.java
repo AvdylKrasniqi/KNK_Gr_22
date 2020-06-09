@@ -12,6 +12,8 @@ import java.sql.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import sample.Menu.DbMenu;
@@ -39,6 +41,12 @@ public class FoodController implements BigController, MenuController, Initializa
     private TextField titleField;
     @FXML
     private TextField priceField;
+    @FXML
+    private Button waiterButton;
+    @FXML
+    private ImageView waiterImage;
+    @FXML
+    private Pane menuPane;
 
 
     @Override
@@ -46,6 +54,13 @@ public class FoodController implements BigController, MenuController, Initializa
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        try {
+            this.kickOut();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.hideTopSecret(menuPane, waiterButton, waiterImage);
+
         try {
 
             tableview.setItems(getItems("food"));

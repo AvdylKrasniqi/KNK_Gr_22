@@ -11,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 // prit te qeli apet
 
-
+// qikjo sigurt duhet mu kon veq model class per menu produkte po sdi kom pas qef me fuck around mb
+// e ndreqi vet ne fund
 public interface MenuController {
     default DbMenu createItem(DbMenu menu) throws Exception {
         Connection conn = Dbinfo.startConnection();

@@ -1,41 +1,42 @@
 package StateClasses;
 
 
+import com.sun.jdi.event.ExceptionEvent;
+
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
+
 public class LoggedUser {
 
-    public enum Status {
-        Waiter, Admin
+
+    public static boolean loggedIn() {
+        return userPreferences.getBoolean("loggedIn", false);
     }
 
-    public static int id;
-    public static String emri;
-    public static Status status;
-    public static boolean loggedIn;
 
+    static Preferences userPreferences = Preferences.userRoot();
 
-    public static void setUser(int id, String emri, Status status) {
-        LoggedUser.id = id;
-        LoggedUser.emri = emri;
-        LoggedUser.status = status;
-        LoggedUser.loggedIn = true;
+    public static void initialize() {
+        userPreferences.putBoolean("loggedIn", false);
     }
 
-    public static void logout() {
-        LoggedUser.id = -1;
-        LoggedUser.emri = null;
-        LoggedUser.status = Status.Waiter;
-        LoggedUser.loggedIn = false;
+    public static void logOut() throws BackingStoreException {
+        userPreferences.clear();
+        userPreferences.putBoolean("loggedIn", false);
     }
 
-    public static boolean isLoggedIn() {
-        return loggedIn;
+    public static int getId() {
+        return userPreferences.getInt("id", 0);
     }
 
-    public static boolean isWaiter() {
-        return (loggedIn && LoggedUser.status == Status.Waiter);
+    public static String getStatus() {
+        return userPreferences.get("status", null);
     }
 
-    public static boolean isAdmin() {
-        return (loggedIn && LoggedUser.status == Status.Admin);
+    public static String getName() {
+        return userPreferences.get("name", null);
     }
+
+
 }
+

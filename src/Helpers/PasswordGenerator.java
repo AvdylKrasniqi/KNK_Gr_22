@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PasswordGenerator {
 
@@ -52,21 +54,30 @@ public class PasswordGenerator {
     }
 
     public static boolean checkPassword(String email, String plainPassword) throws Exception {
+
+        String[] arrPassword = getPassword(email).split("\\.");
+        String actualPassword = arrPassword[0];
+        byte[] salt = Base64.getDecoder().decode(arrPassword[1].getBytes());
+        String generatedPassword[] = generateSaltedPassword(plainPassword, salt).split("\\.");
+
+        return generatedPassword[0].equals(actualPassword);
+    }
+
+
+
+    public static String getPassword(String email) throws Exception {
         Connection conn = Dbinfo.startConnection();
         String query = "Select password from Staff where email=?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
-        String hashedPassword;
+
         if (result.next()) {
-            hashedPassword = result.getString("password");
-        } else throw new Exception("User not found");
-        String[] arrPassword = hashedPassword.split(".");
-        String actualPassword = arrPassword[0];
-        byte[] salt = Base64.getDecoder().decode(arrPassword[1].getBytes());
-        String generatedPassword[] = generateSaltedPassword(plainPassword, salt).split(".");
-        conn.close();
-        return generatedPassword[0].equals(hashedPassword);
+            String finale = result.getString(1);
+            conn.close();
+            return finale;
+
+        } else throw new Exception("User is not here");
     }
 
 }

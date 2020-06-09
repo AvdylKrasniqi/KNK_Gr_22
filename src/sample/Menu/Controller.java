@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +38,12 @@ public class Controller implements BigController, MenuController,Initializable {
     private TextField titleField;
     @FXML
     private TextField priceField;
-
+    @FXML
+    private Button waiterButton;
+    @FXML
+    private ImageView waiterImage;
+    @FXML
+    private Pane menuPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +57,8 @@ public class Controller implements BigController, MenuController,Initializable {
         } catch (Exception e) {
             this.show(e);
 
+
+
         }
 
         tableview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -60,6 +69,12 @@ public class Controller implements BigController, MenuController,Initializable {
             menuToUI(_new,idField,titleField,priceField);
 
         });
+        try {
+            this.kickOut();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.hideTopSecret(menuPane,waiterButton,waiterImage);
 
 
     }
