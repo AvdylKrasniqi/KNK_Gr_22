@@ -31,7 +31,6 @@ public class PersonModel {
     }
 
 
-
     public static boolean isUser(String email) throws Exception {
         Connection con = Dbinfo.startConnection();
         String query = "Select * FROM Staff where email=?";
@@ -41,13 +40,17 @@ public class PersonModel {
         return result.next();
     }
 
-
+    public static ResultSet getAllWaiters() throws Exception {
+        Connection con = Dbinfo.startConnection();
+        String query = "SELECT * FROM Staff where status='Waiter'";
+        PreparedStatement statement = con.prepareStatement(query);
+        return statement.executeQuery();
+    }
 
 
     public static void insertUser(String name, String email, String password, double salary, String status) throws SQLException, NoSuchProviderException, NoSuchAlgorithmException {
 
-        if(!isValidPassword(password))
-        {
+        if (!isValidPassword(password)) {
             System.out.println("Password i papershtatshem");
             return;
         }
@@ -76,32 +79,9 @@ public class PersonModel {
 
     public static boolean isValidPassword(String password) {
 
-        /*It contains at least 8 characters and at most 20 characters.
-          It contains at least one digit.
-          It contains at least one upper case alphabet.
-          It contains at least one lower case alphabet.
-          It contains at least one special character which includes !@#$%&*()-+=^.
-          It doesn’t contain any white space.*/
+    //TODO: validim qe vyn najsen
+        return password.length()>5;
 
-
-        String regex = "^(?=.*[0-9])"
-                + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
-                + "(?=\\S+$).{8,20}$";
-
-
-        Pattern p = Pattern.compile(regex);
-
-
-        if (password == null) {
-            return false;
-        }
-
-
-        Matcher m = p.matcher(password);
-
-
-        return m.matches();
 
     }
 
@@ -120,12 +100,12 @@ public class PersonModel {
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
-        if(result.next())
+        if (result.next())
             return result;
         else throw new Exception("katastrof");
 
-        }
     }
+}
 
 
 

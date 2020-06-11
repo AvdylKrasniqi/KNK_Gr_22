@@ -68,10 +68,13 @@ public class Controller implements BigController, Initializable {
     private ImageView waiterImage;
     @FXML
     private Pane menuPane;
+    @FXML
+    private Label userName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        userName.setText(LoggedUser.getName());
         try {
             this.kickOut();
         } catch (Exception e) {
@@ -131,6 +134,16 @@ public class Controller implements BigController, Initializable {
             return;
         loadAnchor("../partials/MenuChoices.fxml");
         currentAnchorPane = 2;
+
+
+    }
+
+    @FXML
+    public void goToWaiters(javafx.event.ActionEvent actionEvent) throws Exception {
+        if (currentAnchorPane == 5)
+            return;
+        loadAnchor("../partials/Waiter.fxml");
+        currentAnchorPane = 5;
 
 
     }
