@@ -1,6 +1,5 @@
 package sample.PartialControllers;
 
-import Helpers.PasswordGenerator;
 import Models.PersonModel;
 import StateClasses.BigController;
 import StateClasses.Dbinfo;
@@ -11,28 +10,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sample.Menu.DbMenu;
+import javafx.util.converter.NumberStringConverter;
 
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static javafx.scene.control.cell.ComboBoxTableCell.forTableColumn;
 
 public class WaiterController implements Initializable, BigController {
     @FXML
@@ -43,10 +39,9 @@ public class WaiterController implements Initializable, BigController {
     @FXML
     private TableColumn<Waiter, String> emailColumn;
     @FXML
-    private TableColumn<Waiter, Double> salaryColumn;
+    private TableColumn<Waiter, Number> salaryColumn;
     @FXML
     private TableColumn<Waiter, String> joinedColumn;
-
 
     public ObservableList<Waiter> getWaiters() throws Exception {
 
@@ -115,16 +110,49 @@ public class WaiterController implements Initializable, BigController {
 
     }
 
+    @FXML
+    public void updateName(TableColumn.CellEditEvent<Waiter,String> nameEditEvent) throws Exception {
+    Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
+    currentWaiter.setName(nameEditEvent.getNewValue());
+    PersonModel.updateWaiterOnDb(currentWaiter,currentWaiter.getEmail());
+    }
+
+    @FXML
+    public void updateEmail(TableColumn.CellEditEvent<Waiter,String> emailEditEvent) throws Exception {
+        Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
+        if(PersonModel.isUser(emailEditEvent.getNewValue()))
+        {
+            throw new Exception("Email taken");
+        }
+        PersonModel.updateWaiterOnDb(currentWaiter,emailEditEvent.getNewValue());
+
+        currentWaiter.setEmail(emailEditEvent.getNewValue());
+
+    }
+    @FXML
+    public void updateSalary(TableColumn.CellEditEvent<Waiter,Double> salaryEditEvent) throws Exception
+    {
+        Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
+        currentWaiter.setSalary(Double.parseDouble(String.valueOf(salaryEditEvent.getNewValue())));
+        PersonModel.updateWaiterOnDb(currentWaiter,currentWaiter.getEmail());
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        salaryColumn.setCellValueFactory(new PropertyValueFactory<Waiter, Number>("salary"));
+        joinedColumn.setCellValueFactory(new PropertyValueFactory<>("joined"));
+//        -----
+
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        emailColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        salaryColumn.setCellFactory(TextFieldTableCell.<Waiter, Number>forTableColumn(new NumberStringConverter())
+        );
+
         try {
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-            salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
-            joinedColumn.setCellValueFactory(new PropertyValueFactory<>("joined"));
-            System.out.println("test i initialize");
             waiterTable.setItems(getWaiters());
         } catch (Exception e) {
             this.show(e);

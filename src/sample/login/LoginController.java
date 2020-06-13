@@ -10,6 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import javax.crypto.SecretKeyFactory;
@@ -31,7 +34,7 @@ public class LoginController implements BigController, Initializable {
     private Connection conn;
 
     @FXML
-    private Button login_button;
+    private Button loginButton;
     @FXML
     private GridPane mainPane;
     @FXML
@@ -43,7 +46,17 @@ public class LoginController implements BigController, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LoggedUser.initialize();
 
+
     }
+@FXML
+public void loginWithEnter(KeyEvent event) throws Exception
+{
+
+   if(event.getCode()== KeyCode.ENTER)
+      loginButton.fire();
+
+
+}
 
 
     @FXML

@@ -3,6 +3,7 @@ package Models;
 import Helpers.PasswordGenerator;
 import StateClasses.Dbinfo;
 import StateClasses.LoggedUser;
+import StateClasses.Waiter;
 
 import javax.xml.transform.Result;
 import java.security.NoSuchAlgorithmException;
@@ -79,11 +80,13 @@ public class PersonModel {
 
     public static boolean isValidPassword(String password) {
 
-    //TODO: validim qe vyn najsen
-        return password.length()>5;
+        //TODO: validim qe vyn najsen
+        return password.length() > 5;
 
 
     }
+
+
 
     public static void deleteUser(String email) throws SQLException {
         Connection con = Dbinfo.startConnection();
@@ -91,6 +94,19 @@ public class PersonModel {
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.executeUpdate();
         con.close();
+    }
+
+    public static void updateWaiterOnDb(Waiter waiter, String email) throws Exception {
+        Connection con = Dbinfo.startConnection();
+        String query = "Update Staff set name=?,email=?,salary=? where email=?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setString(1, waiter.getName());
+        statement.setString(2, email);
+        statement.setDouble(3, waiter.getSalary());
+        statement.setString(4, waiter.getEmail());
+        int affectedRows = statement.executeUpdate();
+        if (affectedRows != 1)
+            throw new Exception("Gabime ne update");
     }
 
 

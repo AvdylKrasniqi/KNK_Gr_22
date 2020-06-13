@@ -1,5 +1,6 @@
 package sample.kamarieri;
 
+import Models.TableModel;
 import StateClasses.BigController;
 import StateClasses.LoggedUser;
 import StateClasses.Tables;
@@ -30,6 +31,7 @@ import sample.PartialControllers.TableScreenController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +46,8 @@ public class Controller implements BigController, Initializable {
     private boolean[][] occupiedTable = new boolean[5][5];
     //      private ArrayList<Tables> Tavolinat= new ArrayList<>(25);
     private HashMap<Integer, Tables> Tavolinat = new HashMap<>();
+    // sales ne databaze 
+
     @FXML
     private GridPane tablesGrid;
     @FXML
@@ -73,8 +77,42 @@ public class Controller implements BigController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            userName.setText(LoggedUser.getName());
 
-        userName.setText(LoggedUser.getName());
+
+        } catch (Exception e) {
+
+        }
+        try {
+            ResultSet result = TableModel.getTables();
+            System.out.println(numberOfTabels);
+            while (result.next()) {
+                System.out.println("test 1");
+                if (occupiedTable[result.getInt(2)][result.getInt(3)]) {
+                    System.out.println("test 2");
+                    continue;
+                }
+
+                ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
+                table.setFitHeight(100);
+                table.setFitWidth(100);
+                Label text = new Label("Tavolina " + (numberOfTabels + 1));
+                text.setPadding(new Insets(70, 0, 0, 20));
+
+                tablesGrid.add(table, result.getInt(2), result.getInt(3));
+
+                tablesGrid.add(text, result.getInt(2), result.getInt(3));
+                occupiedTable[result.getInt(2)][result.getInt(3)] = true;
+                int place = result.getInt(2) * 5 + result.getInt(3);
+                this.Tavolinat.put(place, new Tables(place));
+
+                numberOfTabels++;
+            }
+        } catch (Exception e) {
+
+        }
+
         try {
             this.kickOut();
         } catch (Exception e) {
@@ -82,6 +120,14 @@ public class Controller implements BigController, Initializable {
         }
         this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
+    }
+
+    @FXML
+    public void goToSales(javafx.event.ActionEvent actionEvent) throws Exception
+    {
+        if(currentAnchorPane==7)
+            return;
+        loadAnchor(".././partials/Sales.fxml");
     }
 
     @FXML
@@ -216,10 +262,10 @@ public class Controller implements BigController, Initializable {
 
 
     @FXML
-    public void addNewTable(MouseEvent event) throws IOException, SQLException {
+    public void addNewTable(MouseEvent event) throws Exception {
         if (addToggle.isSelected()) {
             int[] gridLocation = getGridLocation(event.getX(), event.getY());
-            System.out.println("GridLocation" + gridLocation[0] + gridLocation[1]);
+
             if (occupiedTable[gridLocation[0]][gridLocation[1]]) {
                 return;
             }
@@ -235,8 +281,8 @@ public class Controller implements BigController, Initializable {
             tablesGrid.add(text, gridLocation[0], gridLocation[1]);
             occupiedTable[gridLocation[0]][gridLocation[1]] = true;
 
-            this.Tavolinat.put(convertFromGrid(event), new Tables());
-
+            this.Tavolinat.put(convertFromGrid(event), new Tables(convertFromGrid(event)));
+            TableModel.insertTable(gridLocation[0], gridLocation[1]);
 
         } else if (tableDetails(event)) {
             if (this.Tavolinat.containsKey(convertFromGrid(event)))
@@ -247,6 +293,7 @@ public class Controller implements BigController, Initializable {
             // komanda e pare e hjek imageview kurse e dyta e hjek label
             tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
             tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
+            TableModel.removeTable(coordinates[0], coordinates[1]);
         }
 // 
     }

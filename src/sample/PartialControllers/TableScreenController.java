@@ -1,5 +1,6 @@
 package sample.PartialControllers;
 
+import Models.SalesModel;
 import StateClasses.BigController;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -59,8 +60,6 @@ public class TableScreenController implements BigController, Initializable {
     private Text orderText;
 
 
-
-
     public void setTable(Tables table) throws SQLException {
         this.table = table;
         this.tableCapacity.setText("Kjo tavoline ka " + this.table.getCapacity() + " karrika");
@@ -70,16 +69,20 @@ public class TableScreenController implements BigController, Initializable {
         else this.noCheck.setSelected(true);
         getMenuItems();
     }
-    public void setId(int id )
-    {
-        this.id=id;
+
+    public void setId(int id) {
+        this.id = id;
     }
+
     @FXML
-    public void clearTable()
-    {
+    public void clearTable() throws Exception {
+        SalesModel.insertSales(this.table.getId(), this.table.getTotalPrice());
+
         this.table.clearTable();
         this.noCheck.setSelected(true);
         this.yesCheck.setSelected(false);
+
+
     }
 
     @FXML
@@ -97,6 +100,7 @@ public class TableScreenController implements BigController, Initializable {
 
 
     }
+
     public double getPriceId() throws Exception {
         Connection con = Dbinfo.startConnection();
         String sql = "Select price from Menu where id=?";
@@ -104,13 +108,10 @@ public class TableScreenController implements BigController, Initializable {
 
         ResultSet rez = stmt.executeQuery();
         double price;
-        if (rez.next())
-        {
+        if (rez.next()) {
             price = rez.getDouble(1);
             return price;
-        }
-        else
-        {
+        } else {
             throw new Exception("Gabim!");
         }
 
@@ -142,11 +143,12 @@ public class TableScreenController implements BigController, Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(".././kamarieri/sample.fxml"));
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
-       controller.changeTable(this.id,this.table);
-        Stage stage = (Stage)((Node)((ActionEvent) event).getSource()).getScene().getWindow();
+        controller.changeTable(this.id, this.table);
+        Stage stage = (Stage) ((Node) ((ActionEvent) event).getSource()).getScene().getWindow();
         stage.close();
 
     }
+
 
     @FXML
     public void addItem(ActionEvent event) throws SQLException {
@@ -171,10 +173,11 @@ public class TableScreenController implements BigController, Initializable {
         } else return;
 
         this.table.addProduct(currentItem, price, quantity);
-        this.table.increaseTotalPrice(price*quantity);
+        this.table.increaseTotalPrice(price * quantity);
         System.out.println(this.table.toString());
 
         con.close();
+
     }
 
     @Override
@@ -182,8 +185,9 @@ public class TableScreenController implements BigController, Initializable {
         try {
             getMenuItems();
         } catch (SQLException e) {
-           this.show(e);
+            this.show(e);
         }
+
 
     }
 }

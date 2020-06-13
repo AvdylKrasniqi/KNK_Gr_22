@@ -54,7 +54,7 @@
                         <Font name="Ubuntu Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="57.0" layoutY="61.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="130.0" stylesheets="@../css/style.css" text="Sales">
+                  <Button layoutX="57.0" layoutY="61.0" mnemonicParsing="false" onAction="#goToSales" prefHeight="34.0" prefWidth="130.0" stylesheets="@../css/style.css" text="Sales">
                      <font>
                         <Font name="Ubuntu Bold" size="13.0" />
                      </font>

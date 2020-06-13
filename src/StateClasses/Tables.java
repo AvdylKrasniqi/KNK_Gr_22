@@ -5,19 +5,31 @@ import java.util.Map;
 
 
 public class Tables {
-
+    private int id;
     private boolean isOccupied;
     private HashMap<String, Double> products = new HashMap<>();
     private double totalPrice;
     private int capacity;
+
     public Tables() {
         this.capacity = 4;
         this.isOccupied = false;
     }
 
-    public Tables(int capacity) {
-        this.capacity = capacity;
+    public double getTotalPrice() {
+        return this.totalPrice;
+    }
+
+
+    public Tables(int id) {
+        this.capacity = 4;
+        this.id = id;
         this.isOccupied = false;
+    }
+
+
+    public int getId() {
+        return this.id;
     }
 
     public void increaseTotalPrice(double price) {
@@ -45,10 +57,9 @@ public class Tables {
     }
 
 
-public  HashMap getProducts()
-{
-    return this.products;
-}
+    public HashMap getProducts() {
+        return this.products;
+    }
 
     @Override
     public String toString() {
@@ -58,12 +69,13 @@ public  HashMap getProducts()
         mesazhi.append("\nTotal price eshte " + this.totalPrice);
         mesazhi.append("\nProduktet tona jane");
         for (Map.Entry<String, Double> entry : this.products.entrySet())
-            mesazhi.append("\nSasia:" + entry.getKey()  + " - " + entry.getValue()+" Euro");
+            mesazhi.append("\nSasia:" + entry.getKey() + " - " + entry.getValue() + " Euro");
         mesazhi.append("\nNumri i uleseve eshte " + this.capacity);
         return mesazhi.toString();
 
     }
-//  this.table.addProduct(quantity +" " + currentItem, price, quantity);
+
+    //  this.table.addProduct(quantity +" " + currentItem, price, quantity);
     public void addProduct(String name, Double price, int quantity) {
         this.products.put(name, price * quantity);
     }
