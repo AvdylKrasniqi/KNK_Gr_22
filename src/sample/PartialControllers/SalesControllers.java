@@ -13,8 +13,10 @@ import StateClasses.Waiter;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,9 +39,13 @@ public class SalesControllers implements Initializable, BigController {
     private TableColumn<Sales, Double> amountColumn;
     @FXML
     private TableColumn<Sales, Date> dateColumn;
+    @FXML
+    private DatePicker fromDatePicker;
+    @FXML
+    private DatePicker toDatePicker;
 
 
-    public ObservableList<Sales> getSales(Date from, Date to) throws SQLException {
+    public ObservableList<Sales> getSales(LocalDate from, LocalDate to) throws SQLException {
         ResultSet results = SalesModel.getSales(from, to);
 
         ObservableList<Sales> sales = FXCollections.observableArrayList();
@@ -51,28 +57,44 @@ public class SalesControllers implements Initializable, BigController {
         return sales;
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        toDatePicker.setValue(LocalDate.now());
+        fromDatePicker.setValue(LocalDate.now().minusDays(7));
+        fromDatePicker.valueProperty().addListener((ov, oldValue, newValue) -> {
+            salesTable.getItems().clear();
+            try {
+                salesTable.setItems(getSales(fromDatePicker.getValue(), toDatePicker.getValue()));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(new java.util.Date());
-
-        Date to = (Date) c.getTime();
-        c.add(Calendar.DAY_OF_MONTH, -7);
-        Date from = (Date) c.getTime();
+        toDatePicker.valueProperty().addListener((ov, oldValue, newValue) -> {
+            salesTable.getItems().clear();
+            try {
+                salesTable.setItems(getSales(fromDatePicker.getValue(), toDatePicker.getValue()));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
 
         try {
-            System.out.println(from);
-            System.out.println(to);
-            salesTable.setItems(getSales(from, to));
+
+            salesTable.setItems(getSales(fromDatePicker.getValue(), toDatePicker.getValue()));
         } catch (Exception e) {
             this.show(e);
-           e.printStackTrace();
+            e.printStackTrace();
         }
+
+
     }
 
 

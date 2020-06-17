@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="tablePane" onMouseClicked="#addTable" prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.kamarieri.Controller">
+<AnchorPane fx:id="tablePane" onMouseClicked="#addTable" prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.kamarieri.Controller">
    <children>
-      <HBox layoutY="458.0" onMouseClicked="#addNewTable" prefHeight="86.0" prefWidth="602.0" spacing="15.0" style="-fx-background-color: #001f3f;">
-         <children>
-            <ToggleButton fx:id="addToggle" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Add">
-               <HBox.margin>
-                  <Insets left="80.0" right="80.0" top="15.0" />
-               </HBox.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="updateToggle" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Update">
-               <HBox.margin>
-                  <Insets right="80.0" top="15.0" />
-               </HBox.margin>
-            </ToggleButton>
-            <ToggleButton fx:id="deleteToggle" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #ffa000;" text="Delete">
-               <HBox.margin>
-                  <Insets right="80.0" top="15.0" />
-               </HBox.margin>
-            </ToggleButton>
-         </children>
+      <HBox layoutY="458.0" prefHeight="86.0" prefWidth="602.0" spacing="15.0" style="-fx-background-color: #001f3f;">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </HBox>
-      <GridPane fx:id="tablesGrid" onMouseClicked="#addNewTable" prefHeight="456.0" prefWidth="602.0">
+      <GridPane fx:id="tablesGrid" onContextMenuRequested="#openContextMenu" prefHeight="456.0" prefWidth="602.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

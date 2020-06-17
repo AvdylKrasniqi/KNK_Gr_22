@@ -13,12 +13,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.Window;
 import sample.PartialControllers.TableScreenController;
 
 import java.io.IOException;
@@ -74,6 +73,17 @@ public class Controller implements BigController, Initializable {
     private Pane menuPane;
     @FXML
     private Label userName;
+    @FXML
+    private ContextMenu tableContext = new ContextMenu();
+
+    @FXML
+    private ContextMenu tableFullContext = new ContextMenu();
+    @FXML
+    MenuItem add = new MenuItem("add");
+    @FXML
+    MenuItem update = new MenuItem("Update");
+    @FXML
+    MenuItem delete = new MenuItem("delete");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -120,14 +130,19 @@ public class Controller implements BigController, Initializable {
         }
         this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
+
+        tableContext.getItems().addAll(add);
+        tableFullContext.getItems().addAll(update, delete);
+
+
     }
 
     @FXML
-    public void goToSales(javafx.event.ActionEvent actionEvent) throws Exception
-    {
-        if(currentAnchorPane==7)
+    public void goToSales(javafx.event.ActionEvent actionEvent) throws Exception {
+        if (currentAnchorPane == 7)
             return;
         loadAnchor(".././partials/Sales.fxml");
+        currentAnchorPane = 7;
     }
 
     @FXML
@@ -260,43 +275,84 @@ public class Controller implements BigController, Initializable {
         return result;
     }
 
-
     @FXML
-    public void addNewTable(MouseEvent event) throws Exception {
-        if (addToggle.isSelected()) {
-            int[] gridLocation = getGridLocation(event.getX(), event.getY());
+    public void openContextMenu(ContextMenuEvent event) {
 
-            if (occupiedTable[gridLocation[0]][gridLocation[1]]) {
-                return;
-            }
+        int[] currentLocation = getGridLocation(event.getScreenX(), event.getScreenY());
+        int[] cord = getGridLocation(event.getX(), event.getY());
+        if (occupiedTable[cord[0]][cord[1]]) {
+            update.setOnAction(e -> {
+                try {
+                    updateTable(cord);
+                } catch (Exception exception) {
+                    this.show(exception);
+                }
+            });
+            delete.setOnAction(e -> {
+                try {
+                    deleteTable(cord);
+                } catch (Exception exception) {
+                    this.show(exception);
+                }
+            });
 
-            ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
-            table.setFitHeight(100);
-            table.setFitWidth(100);
-            Label text = new Label("Tavolina " + (numberOfTabels + 1));
-            text.setPadding(new Insets(70, 0, 0, 20));
-            numberOfTabels++;
-            tablesGrid.add(table, gridLocation[0], gridLocation[1]);
 
-            tablesGrid.add(text, gridLocation[0], gridLocation[1]);
-            occupiedTable[gridLocation[0]][gridLocation[1]] = true;
+            tableFullContext.show(tablesGrid, event.getScreenX(), event.getScreenY());
 
-            this.Tavolinat.put(convertFromGrid(event), new Tables(convertFromGrid(event)));
-            TableModel.insertTable(gridLocation[0], gridLocation[1]);
 
-        } else if (tableDetails(event)) {
-            if (this.Tavolinat.containsKey(convertFromGrid(event)))
-                loadViewData(".././partials/SpecificTable.fxml", convertFromGrid(event));
-        } else if (deleteTable(event)) {
-            int[] coordinates = getGridLocation(event.getX(), event.getY());
-            this.Tavolinat.replace(convertFromGrid(event), null);
-            // komanda e pare e hjek imageview kurse e dyta e hjek label
-            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
-            tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
-            TableModel.removeTable(coordinates[0], coordinates[1]);
+            tableContext.hide();
+        } else {
+            add.setOnAction(e -> {
+                try {
+                    addNewTable(cord);
+                } catch (Exception exception) {
+                    this.show(exception);
+                }
+            });
+            tableContext.show(tablesGrid, event.getScreenX(), event.getScreenY());
+
+            tableFullContext.hide();
         }
-// 
+
     }
+
+    public void addNewTable(int[] gridLocation) throws Exception {
+
+        ImageView table = new ImageView(getClass().getResource(".././Images/tableforview.png").toExternalForm());
+        table.setFitHeight(100);
+        table.setFitWidth(100);
+        Label text = new Label("Tavolina " + (numberOfTabels + 1));
+        text.setPadding(new Insets(70, 0, 0, 20));
+        numberOfTabels++;
+        tablesGrid.add(table, gridLocation[0], gridLocation[1]);
+
+        tablesGrid.add(text, gridLocation[0], gridLocation[1]);
+        occupiedTable[gridLocation[0]][gridLocation[1]] = true;
+
+        this.Tavolinat.put(convertFromGrid(gridLocation), new Tables(convertFromGrid(gridLocation)));
+        TableModel.insertTable(gridLocation[0], gridLocation[1]);
+
+    }
+
+    public int convertFromGrid(int[] gridLocation) {
+        return gridLocation[0] * 5 + gridLocation[1];
+    }
+
+
+    public void updateTable(int[] gridLocation) throws IOException, SQLException {
+        if (this.Tavolinat.containsKey(convertFromGrid(gridLocation)))
+            loadViewData(".././partials/SpecificTable.fxml", convertFromGrid(gridLocation));
+    }
+
+    public void deleteTable(int[] coordinates) throws SQLException {
+
+        this.Tavolinat.replace(convertFromGrid(coordinates), null);
+        // komanda e pare e hjek imageview kurse e dyta e hjek label
+        tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
+        tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
+        TableModel.removeTable(coordinates[0], coordinates[1]);
+    }
+
 
     public boolean tableDetails(MouseEvent event) {
         int coordinates[] = getGridLocation(event.getX(), event.getY());
