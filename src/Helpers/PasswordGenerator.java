@@ -65,6 +65,8 @@ public class PasswordGenerator {
 
 
 
+
+
     public static String getPassword(String email) throws Exception {
         Connection conn = Dbinfo.startConnection();
         String query = "Select password from Staff where email=?";
@@ -79,6 +81,7 @@ public class PasswordGenerator {
 
         } else throw new Exception("User is not here");
     }
+
 
 }
 

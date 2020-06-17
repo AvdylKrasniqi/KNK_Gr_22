@@ -42,11 +42,13 @@ public class CreateWaiterController  implements Initializable {
             throw new Exception("User already exists");
         }
 
+
+
         PersonModel.insertUser
                 (
                         nameField.getText(),
                         emailField.getText(),
-                        PasswordGenerator.generateSaltedPassword(passwordField.getText()),
+                        passwordField.getText(),
                         Double.parseDouble(salaryField.getText()),
                         "Waiter"
                 );

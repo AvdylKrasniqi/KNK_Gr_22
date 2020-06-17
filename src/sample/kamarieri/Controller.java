@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,6 +28,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.stage.Window;
+import sample.PartialControllers.HelpController;
 import sample.PartialControllers.TableScreenController;
 
 import java.io.IOException;
@@ -87,6 +90,9 @@ public class Controller implements BigController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         try {
             userName.setText(LoggedUser.getName());
 
@@ -130,10 +136,21 @@ public class Controller implements BigController, Initializable {
         }
         this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
+        if(LoggedUser.getStatus().equalsIgnoreCase("Admin")) {
+            tableContext.getItems().addAll(add);
+            tableFullContext.getItems().addAll(update, delete);
+        }
+        else
+        {
+            tableFullContext.getItems().add(update);
+        }
 
-        tableContext.getItems().addAll(add);
-        tableFullContext.getItems().addAll(update, delete);
+    }
 
+    @FXML
+    public void openHelpView(KeyEvent event) throws IOException {
+        if(event.getCode()== KeyCode.F1)
+            new HelpController().openHelp();
 
     }
 
