@@ -2,12 +2,8 @@ package Models;
 
 import StateClasses.Dbinfo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class SalesModel {
 
@@ -34,5 +30,22 @@ public class SalesModel {
         return statement.executeQuery();
 
     }
+
+    public static int getTodaysSales() throws  Exception
+    {
+        Connection con =Dbinfo.startConnection();
+        String query="SELECT sum(amount) as  'shuma' from Sales where data=?";
+        PreparedStatement statement=con.prepareStatement(query);
+        statement.setDate(1,new Date(new java.util.Date().getTime()));
+        ResultSet results= statement.executeQuery();
+        if(results.next())
+        {
+            return results.getInt("shuma");
+        }
+        else
+            throw new Exception("kuku");
+
+    }
+
 
 }

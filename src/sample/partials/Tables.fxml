@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="tablePane" onMouseClicked="#addTable" prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.kamarieri.Controller">
+<AnchorPane fx:id="tablePane" onMouseClicked="#addTable" prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.kamarieri.Controller">
    <children>
-      <HBox layoutY="458.0" prefHeight="86.0" prefWidth="602.0" spacing="15.0" style="-fx-background-color: #001f3f;">
-         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </padding>
-      </HBox>
-      <GridPane fx:id="tablesGrid" onContextMenuRequested="#openContextMenu" prefHeight="456.0" prefWidth="602.0">
+      <GridPane fx:id="tablesGrid" onContextMenuRequested="#openContextMenu" onMouseClicked="#updateValues" prefHeight="499.0" prefWidth="602.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,5 +25,24 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <AnchorPane layoutY="510.0" prefHeight="40.0" prefWidth="602.0" style="-fx-background-color: rgba(0, 31, 63, 1);">
+         <children>
+            <Label fx:id="numberOfTable" layoutX="24.0" layoutY="12.0" text="Numri i tavolinave :" textFill="WHITE">
+               <font>
+                  <Font name="Tibetan_Machine_Uni" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="numberOfActiveTables" layoutX="210.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="Numri i tavolinave te nxera:" textFill="WHITE">
+               <font>
+                  <Font name="Tibetan_Machine_Uni" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="brutoEarnings" layoutX="420.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="Fitimi bruto per sot:" textFill="WHITE">
+               <font>
+                  <Font name="Tibetan_Machine_Uni" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

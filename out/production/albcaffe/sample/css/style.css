@@ -10,3 +10,9 @@
 
 }
 
+.dropbox
+{
+    -fx-padding:  10px;
+    -fx-background-color:  white;
+    -fx-effect:  dropshadow( gaussian , rgba(0,0,0,0.7) , 9,0,0,1 );
+}

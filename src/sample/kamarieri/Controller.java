@@ -1,9 +1,11 @@
 package sample.kamarieri;
 
+import Models.SalesModel;
 import Models.TableModel;
 import StateClasses.BigController;
 import StateClasses.LoggedUser;
 import StateClasses.Tables;
+import com.mysql.jdbc.log.Log;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -37,12 +39,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements BigController, Initializable {
-    public static int numberOfTabels;
+    public static int numberOfTabels = 0;
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
@@ -82,18 +85,23 @@ public class Controller implements BigController, Initializable {
     @FXML
     private ContextMenu tableFullContext = new ContextMenu();
     @FXML
-    MenuItem add = new MenuItem("add");
+    private MenuItem add = new MenuItem("add");
     @FXML
-    MenuItem update = new MenuItem("Update");
+    private MenuItem update = new MenuItem("Update");
     @FXML
-    MenuItem delete = new MenuItem("delete");
+    private MenuItem delete = new MenuItem("delete");
+    @FXML
+    public Label numberOfTable;
+    @FXML
+    public Label numberOfActiveTables;
+    @FXML
+    public Label brutoEarnings;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
         try {
+
             userName.setText(LoggedUser.getName());
 
 
@@ -136,20 +144,60 @@ public class Controller implements BigController, Initializable {
         }
         this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
-        if(LoggedUser.getStatus().equalsIgnoreCase("Admin")) {
+        if (LoggedUser.getStatus().equalsIgnoreCase("Admin")) {
             tableContext.getItems().addAll(add);
             tableFullContext.getItems().addAll(update, delete);
-        }
-        else
-        {
+        } else {
             tableFullContext.getItems().add(update);
+        }
+
+        try {
+            updateStatus();
+        } catch (Exception exception) {
+
         }
 
     }
 
+    public void updateNumberOfTables() {
+        this.numberOfTable.setText("Numri i tavolinave: " + numberOfTabels);
+    }
+
+    public void updateActiveTables() {
+        int counter = 0;
+        for (Map.Entry<Integer, Tables> entry : this.Tavolinat.entrySet()) {
+            if (entry.getValue().getOccupied())
+                counter++;
+
+        }
+
+        this.numberOfActiveTables.setText("Numri i tavolinave te zena: " + counter);
+    }
+
+
+    public void updateStatus() throws Exception {
+        updateNumberOfTables();
+        updateActiveTables();
+        updateEarnings();
+    }
+
+    public void updateEarnings() throws Exception {
+        int todaySales = SalesModel.getTodaysSales();
+        this.brutoEarnings.setText("Fitimi bruto  per sot: " + todaySales);
+
+
+    }
+
+
+    @FXML
+    public void logOut(ActionEvent event) throws Exception {
+        LoggedUser.logOut();
+        this.loadView(event, "../login/login.fxml");
+    }
+
     @FXML
     public void openHelpView(KeyEvent event) throws IOException {
-        if(event.getCode()== KeyCode.F1)
+        if (event.getCode() == KeyCode.F1)
             new HelpController().openHelp();
 
     }
@@ -265,7 +313,7 @@ public class Controller implements BigController, Initializable {
         int gridLocation[] = new int[2];
 
         gridLocation[0] = (int) Math.floor((x / 120.4));
-        gridLocation[1] = (int) Math.floor((y / 91.2));
+        gridLocation[1] = (int) Math.floor((y / 99.8));
         return gridLocation;
 
     }
@@ -331,6 +379,15 @@ public class Controller implements BigController, Initializable {
             tableFullContext.hide();
         }
 
+    }
+
+    @FXML
+    public void updateValues(MouseEvent event) {
+        try {
+            updateStatus();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addNewTable(int[] gridLocation) throws Exception {
