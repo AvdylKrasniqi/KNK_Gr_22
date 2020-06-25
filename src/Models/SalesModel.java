@@ -17,7 +17,6 @@ public class SalesModel {
         if (affectedRows != 1)
             throw new Exception("Gabim ne shtim");
     }
-
     public static ResultSet getSales(LocalDate from, LocalDate to) throws SQLException {
         Connection con = Dbinfo.startConnection();
         String query = "SELECT * FROM Sales WHERE data >= ? and data <= ?";
@@ -33,8 +32,9 @@ public class SalesModel {
 
     public static int getTodaysSales() throws  Exception
     {
+        System.out.println(new Date(new java.util.Date().getTime()));
         Connection con =Dbinfo.startConnection();
-        String query="SELECT sum(amount) as  'shuma' from Sales where data=?";
+        String query="SELECT sum(amount) as  'shuma' from Sales where DATE(data)=?";
         PreparedStatement statement=con.prepareStatement(query);
         statement.setDate(1,new Date(new java.util.Date().getTime()));
         ResultSet results= statement.executeQuery();
@@ -46,6 +46,7 @@ public class SalesModel {
             throw new Exception("kuku");
 
     }
+
 
 
 }

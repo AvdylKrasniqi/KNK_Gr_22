@@ -19,8 +19,8 @@
             <Image url="@../Images/coke.png" />
          </image>
       </ImageView>
-      <Button fx:id="foodButton" layoutX="397.0" layoutY="392.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFood" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/style.css" text="Ushqimi" />
-      <Button fx:id="drinksButton" layoutX="125.0" layoutY="392.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToDrinks" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/style.css" text="Pijet" />
+      <Button fx:id="foodButton" layoutX="397.0" layoutY="392.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFood" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/style.css" text="%Food" />
+      <Button fx:id="drinksButton" layoutX="125.0" layoutY="392.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToDrinks" prefHeight="35.0" prefWidth="100.0" stylesheets="@../css/style.css" text="%Drink" />
       <Text layoutX="168.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZGJEDHNI USHQIMIN / PIJET">
          <font>
             <Font name="Symbol" size="23.0" />

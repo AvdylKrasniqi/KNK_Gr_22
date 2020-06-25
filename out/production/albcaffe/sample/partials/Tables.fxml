@@ -27,17 +27,17 @@
       </GridPane>
       <AnchorPane layoutY="510.0" prefHeight="40.0" prefWidth="602.0" style="-fx-background-color: rgba(0, 31, 63, 1);">
          <children>
-            <Label fx:id="numberOfTable" layoutX="24.0" layoutY="12.0" text="Numri i tavolinave :" textFill="WHITE">
+            <Label fx:id="numberOfTable" layoutX="24.0" layoutY="12.0" text="%TableNumber" textFill="WHITE">
                <font>
                   <Font name="Tibetan_Machine_Uni" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="numberOfActiveTables" layoutX="210.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="Numri i tavolinave te nxera:" textFill="WHITE">
+            <Label fx:id="numberOfActiveTables" layoutX="210.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="%OccupiedTables" textFill="WHITE">
                <font>
                   <Font name="Tibetan_Machine_Uni" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="brutoEarnings" layoutX="420.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="Fitimi bruto per sot:" textFill="WHITE">
+            <Label fx:id="brutoEarnings" layoutX="420.0" layoutY="12.0" prefHeight="16.0" prefWidth="193.0" text="%Earnings" textFill="WHITE">
                <font>
                   <Font name="Tibetan_Machine_Uni" size="13.0" />
                </font>

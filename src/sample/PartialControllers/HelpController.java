@@ -1,22 +1,47 @@
 package sample.PartialControllers;
 
+import StateClasses.BigController;
 import com.sun.source.tree.Tree;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
-public class HelpController implements Initializable {
+public class HelpController implements Initializable, BigController {
     @FXML
     private TreeView<String> helpTree;
+    @FXML
+    private AnchorPane textPane;
+    @FXML
+    private Text helpText;
+    @FXML
+    private Menu fileMenu;
+    @FXML
+    private Menu reportMenu;
+    @FXML
+    private MenuItem closeItem;
+    @FXML
+    private MenuItem websiteItem;
+    @FXML
+    private MenuItem emailItem;
+
+    private final static  String OS = System.getProperty("os.name").toLowerCase();
+
+
 
     public void openHelp() throws IOException {
         Parent nodeRoot = FXMLLoader.load(getClass().getResource("../partials/Help.fxml"));
@@ -27,48 +52,133 @@ public class HelpController implements Initializable {
 
     }
 
+    public TreeItem<String> createTree(String main, String first, String second, String third) {
+        TreeItem<String> tableItem = new TreeItem<>(main);
+
+        tableItem.getChildren().addAll(new TreeItem<>(first), new TreeItem<>(second), new TreeItem<>(third));
+        return tableItem;
+    }
 
 
-    public void  initializeTree() {
-        /*
-        help
-            tavolinat
-            kamarieret
-            menu
-            sales
-         */
+    public void fillText() {
+        EventHandler<MouseEvent> mouseEventHandle = (MouseEvent event) -> {
+            handleMouseClicked(event);
+
+        };
+
+        helpTree.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEventHandle);
+
+    }
+
+    public void handleMouseClicked(MouseEvent event) {
+        Node node = event.getPickResult().getIntersectedNode();
+        // Accept clicks only on node cells, and not on empty spaces of the TreeView
+        if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+            String name = (String) ((TreeItem) helpTree.getSelectionModel().getSelectedItem()).getValue();
+            helpText.setText(readColumn("src/help/" + name + ".txt"));
+        }
+    }
+
+    public String readColumn(String path) {
+        File file = new File(path);
+        Scanner fileContent = null;
+        try {
+            StringBuilder fileText = new StringBuilder();
+            fileContent = new Scanner(file);
+            while (fileContent.hasNext()) {
+                fileText.append(fileContent.nextLine());
+            }
+            return fileText.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (fileContent != null)
+                fileContent.close();
+        }
+        return null;
+    }
+
+    public void initializeTree() {
 
         TreeItem<String> mainItem = new TreeItem<>("Help");
-        TreeItem<String> tableItem=new TreeItem<>("Tavolinat");
-        tableItem.getChildren().add(new TreeItem<String>("Shtimi i tavolines"));
-        tableItem.getChildren().add(new TreeItem<String>("Perditesimi i tavolines"));
-        tableItem.getChildren().add(new TreeItem<String>("Fshirja e tavolines"));
-        TreeItem<String> waiterItem=new TreeItem<>("Kamarieret");
-        waiterItem.getChildren().add(new TreeItem<>("Shtimi i kamariereve"));
-        waiterItem.getChildren().add(new TreeItem<>("Perditismi i kamariereve"));
-        waiterItem.getChildren().add(new TreeItem<>("Perjashtimi i kamariereve"));
-        TreeItem<String> menuItem=new TreeItem<>("Menu");
-        menuItem.getChildren().add(new TreeItem<>("Shtimi i produktit"));
-        menuItem.getChildren().add(new TreeItem<>("Perditesimi i produktit"));
-        menuItem.getChildren().add(new TreeItem<>("Fshirja e produktit"));
-
-
-
-
+//
+        TreeItem<String> tableItem = createTree("Tavolinat", "Shtimi i tavolines", "Perditesimi i tavolines", "Fshirja e tavolines");
+        TreeItem<String> waiterItem = createTree("Kamarieret", "Shtimi i kamariereve", "Perditsimi i Kamariereve", "Perjashtimi i kamarierve");
+        TreeItem<String> menuItem = createTree("Menu", "Shtimi i produktit", "Perditesimi i produktit", "Fshirja e produktit");
         tableItem.setExpanded(true);
         waiterItem.setExpanded(true);
         menuItem.setExpanded(true);
-        mainItem.getChildren().addAll(tableItem,waiterItem,menuItem);
+        mainItem.getChildren().addAll(tableItem, waiterItem, menuItem);
         mainItem.setExpanded(true);
         helpTree.setRoot(mainItem);
+        fillText();
 
 
     }
 
+    public static boolean isWindows()
+    {
 
+        return OS.contains("win");
+    }
+
+    public static boolean isMac()
+    {
+        return OS.contains("mac");
+    }
+
+    public static boolean isUnix()
+    {
+        return OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0;
+    }
+
+
+    public static void openURL(String url)
+    {
+
+        Runtime rt = Runtime.getRuntime();
+        try {
+            if (isWindows()) {
+                rt.exec("rundll32 url.dll,FileProtocolHandler " + url).waitFor();
+
+            } else if (isMac()) {
+                String[] cmd = {"open", url};
+                rt.exec(cmd).waitFor();
+
+            } else if (isUnix()) {
+                String[] cmd = {"xdg-open", url};
+                rt.exec(cmd).waitFor();
+
+            } else {
+                try {
+                    throw new IllegalStateException();
+                } catch (IllegalStateException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+     closeItem.setOnAction(e->{
+         Stage currentStage = (Stage) helpTree.getScene().getWindow();
+         currentStage.close();
 
-    initializeTree();
+     });
+    websiteItem.setOnAction(e->
+    {
+        openURL("www.google.com");
+    });
+
+    emailItem.setOnAction(e->
+    {
+        openURL("www.youtube.com");
+    });
+
+
+        initializeTree();
     }
 }

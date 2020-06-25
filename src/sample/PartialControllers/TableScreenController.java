@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.geometry.Insets;
@@ -87,8 +88,9 @@ public class TableScreenController implements BigController, Initializable {
 
     @FXML
     public void goToDetails(ActionEvent actionEvent) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Detajet.fxml"));
+        Locale locale = new Locale("en", "UK");
+        ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Detajet.fxml"),bundle);
         Parent root = loader.load();
         SpecificTableController ctrl = loader.getController();
         ctrl.setSpecificProducts(this.table.getProducts());

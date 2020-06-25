@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public interface BigController {
 
@@ -65,8 +67,11 @@ public interface BigController {
 
     default public void loadView(Event actionEvent, String path) {
         Parent nodeRoot = null;
+        Locale locale = new Locale("en", "UK");
+        ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
         try {
-            nodeRoot = FXMLLoader.load(getClass().getResource(path));
+
+            nodeRoot = FXMLLoader.load(getClass().getResource(path),bundle);
 
 
         } catch (IOException e) {

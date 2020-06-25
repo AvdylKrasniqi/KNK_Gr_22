@@ -9,16 +9,16 @@
    <children>
       <TableView fx:id="waiterTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="599.0">
          <columns>
-            <TableColumn fx:id="nameColumn" onEditCommit="#updateName" prefWidth="75.0" text="name" />
-            <TableColumn fx:id="emailColumn" onEditCommit="#updateEmail" prefWidth="75.0" text="email" />
-            <TableColumn fx:id="salaryColumn" onEditCommit="#updateSalary" prefWidth="75.0" text="salary" />
-            <TableColumn fx:id="joinedColumn" prefWidth="75.0" text="joined" />
+            <TableColumn fx:id="nameColumn" onEditCommit="#updateName" prefWidth="75.0" text="%Name" />
+            <TableColumn fx:id="emailColumn" onEditCommit="#updateEmail" prefWidth="75.0" text="%Email" />
+            <TableColumn fx:id="salaryColumn" onEditCommit="#updateSalary" prefWidth="75.0" text="%Salary" />
+            <TableColumn fx:id="joinedColumn" prefWidth="75.0" text="%Joined" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="55.0" layoutY="493.0" mnemonicParsing="false" onAction="#onCreateWaiter" text="Create" />
-      <Button layoutX="465.0" layoutY="493.0" mnemonicParsing="false" onAction="#onDeleteWaiter" text="Delete" />
+      <Button layoutX="55.0" layoutY="493.0" mnemonicParsing="false" onAction="#onCreateWaiter" text="%Create" />
+      <Button layoutX="465.0" layoutY="493.0" mnemonicParsing="false" onAction="#onDeleteWaiter" text="%Delete" />
    </children>
 </AnchorPane>

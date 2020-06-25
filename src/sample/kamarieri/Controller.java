@@ -37,10 +37,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.prefs.Preferences;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
@@ -96,6 +93,8 @@ public class Controller implements BigController, Initializable {
     public Label numberOfActiveTables;
     @FXML
     public Label brutoEarnings;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -183,6 +182,7 @@ public class Controller implements BigController, Initializable {
 
     public void updateEarnings() throws Exception {
         int todaySales = SalesModel.getTodaysSales();
+        System.out.println(todaySales);
         this.brutoEarnings.setText("Fitimi bruto  per sot: " + todaySales);
 
 
@@ -196,10 +196,18 @@ public class Controller implements BigController, Initializable {
     }
 
     @FXML
-    public void openHelpView(KeyEvent event) throws IOException {
+    public void openHelpView(KeyEvent event) throws Exception {
         if (event.getCode() == KeyCode.F1)
             new HelpController().openHelp();
+        if (event.getCode() == KeyCode.L && event.isControlDown()) {
+            LoggedUser.logOut();
+            this.loadView((Event) event, ".././login/login.fxml");
+        }
+        if (event.getCode() == KeyCode.W && event.isControlDown() && event.isAltDown()) {
 
+            Stage currentStage = (Stage) MainPane.getScene().getWindow();
+            currentStage.close();
+        }
     }
 
     @FXML
@@ -229,21 +237,23 @@ public class Controller implements BigController, Initializable {
         this.Tavolinat.replace(id, table);
     }
 
-    public void loadAnchor(String path) throws Exception {
+    public void loadAnchor(String path) {
         if (currentAnchorPane != 0) {
             removeAnchor();
         }
         AnchorPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource(path));
+            Locale locale = new Locale("en", "UK");
+            ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
+            root = FXMLLoader.load(getClass().getResource(path),bundle);
             MainPane.add((AnchorPane) root, 1, 1);
 
-        } catch (IOException e) {
-//           this.show(e);
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
     }
+
 
     @FXML
     public void openTables(javafx.event.ActionEvent actionEvent) throws Exception {
@@ -419,11 +429,14 @@ public class Controller implements BigController, Initializable {
     }
 
     public void deleteTable(int[] coordinates) throws SQLException {
-
-        this.Tavolinat.replace(convertFromGrid(coordinates), null);
+        // hashmap remove
+        this.Tavolinat.remove(convertFromGrid(coordinates));
+        occupiedTable[coordinates[0]][coordinates[1]] = false;
         // komanda e pare e hjek imageview kurse e dyta e hjek label
         tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
         tablesGrid.getChildren().remove(getNodeByRowColumnIndex(coordinates[1], coordinates[0], tablesGrid));
+
+        // db remove
         TableModel.removeTable(coordinates[0], coordinates[1]);
     }
 
