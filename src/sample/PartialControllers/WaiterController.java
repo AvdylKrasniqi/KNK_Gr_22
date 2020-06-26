@@ -1,5 +1,6 @@
 package sample.PartialControllers;
 
+import Helpers.Language;
 import Models.PersonModel;
 import StateClasses.BigController;
 import StateClasses.Dbinfo;
@@ -65,7 +66,7 @@ public class WaiterController implements Initializable, BigController {
     @FXML
     public void onCreateWaiter(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../partials/CreateWaiterDialog.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../partials/CreateWaiterDialog.fxml"), Language.getBundle());
         Parent root = (Parent) loader.load();
 
 

@@ -1,5 +1,6 @@
 package StateClasses;
 
+import Helpers.Language;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -67,11 +68,10 @@ public interface BigController {
 
     default public void loadView(Event actionEvent, String path) {
         Parent nodeRoot = null;
-        Locale locale = new Locale("en", "UK");
-        ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
+
         try {
 
-            nodeRoot = FXMLLoader.load(getClass().getResource(path),bundle);
+            nodeRoot = FXMLLoader.load(getClass().getResource(path), Language.getBundle());
 
 
         } catch (IOException e) {
@@ -107,6 +107,7 @@ public interface BigController {
 
     default public void show(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        e.printStackTrace();
         alert.setContentText(e.getMessage());
         alert.showAndWait();
      if(e.getMessage().equalsIgnoreCase("Nuk je logged in"))

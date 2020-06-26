@@ -1,5 +1,6 @@
 package sample.kamarieri;
 
+import Helpers.Language;
 import Models.SalesModel;
 import Models.TableModel;
 import StateClasses.BigController;
@@ -243,9 +244,8 @@ public class Controller implements BigController, Initializable {
         }
         AnchorPane root = null;
         try {
-            Locale locale = new Locale("en", "UK");
-            ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
-            root = FXMLLoader.load(getClass().getResource(path),bundle);
+
+            root = FXMLLoader.load(getClass().getResource(path),Language.getBundle());
             MainPane.add((AnchorPane) root, 1, 1);
 
         } catch (Exception e) {
@@ -286,8 +286,9 @@ public class Controller implements BigController, Initializable {
 
 
     public void loadViewData(String path, int id) throws IOException, SQLException {
+       // TODO:HERE
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), Language.getBundle());
         Parent root = (Parent) loader.load();
 
 

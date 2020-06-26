@@ -1,5 +1,6 @@
 package sample.PartialControllers;
 
+import Helpers.Language;
 import StateClasses.BigController;
 import com.sun.source.tree.Tree;
 import javafx.event.EventHandler;
@@ -44,7 +45,7 @@ public class HelpController implements Initializable, BigController {
 
 
     public void openHelp() throws IOException {
-        Parent nodeRoot = FXMLLoader.load(getClass().getResource("../partials/Help.fxml"));
+        Parent nodeRoot = FXMLLoader.load(getClass().getResource("../partials/Help.fxml"), Language.getBundle());
         Scene helpScene = new Scene(nodeRoot);
         Stage helpStage = new Stage();
         helpStage.setScene(helpScene);

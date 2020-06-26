@@ -1,5 +1,6 @@
 package sample.PartialControllers;
 
+import Helpers.Language;
 import Models.SalesModel;
 import StateClasses.BigController;
 import javafx.scene.Scene;
@@ -88,9 +89,8 @@ public class TableScreenController implements BigController, Initializable {
 
     @FXML
     public void goToDetails(ActionEvent actionEvent) throws Exception {
-        Locale locale = new Locale("en", "UK");
-        ResourceBundle bundle = ResourceBundle.getBundle("Languages.strings", locale);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Detajet.fxml"),bundle);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Detajet.fxml"), Language.getBundle());
         Parent root = loader.load();
         SpecificTableController ctrl = loader.getController();
         ctrl.setSpecificProducts(this.table.getProducts());
@@ -142,7 +142,7 @@ public class TableScreenController implements BigController, Initializable {
 
     @FXML
     public void saveTable(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././kamarieri/sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././kamarieri/sample.fxml"),Language.getBundle());
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
         controller.changeTable(this.id, this.table);
