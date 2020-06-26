@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.WaiterController">
    <children>
-      <TableView fx:id="waiterTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="599.0">
+      <TableView fx:id="waiterTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="599.0" stylesheets="@../css/tables.css">
          <columns>
             <TableColumn fx:id="nameColumn" onEditCommit="#updateName" prefWidth="75.0" text="%Name" />
             <TableColumn fx:id="emailColumn" onEditCommit="#updateEmail" prefWidth="75.0" text="%Email" />
@@ -18,7 +18,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="55.0" layoutY="493.0" mnemonicParsing="false" onAction="#onCreateWaiter" text="%Create" />
-      <Button layoutX="465.0" layoutY="493.0" mnemonicParsing="false" onAction="#onDeleteWaiter" text="%Delete" />
+      <Button layoutX="55.0" layoutY="493.0" mnemonicParsing="false" onAction="#onCreateWaiter" stylesheets="@../css/button.css" text="%Create" />
+      <Button layoutX="465.0" layoutY="493.0" mnemonicParsing="false" onAction="#onDeleteWaiter" stylesheets="@../css/button.css" text="%Delete" />
    </children>
 </AnchorPane>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.CreateWaiterController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/button.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.CreateWaiterController">
    <children>
       <Label layoutX="250.0" layoutY="14.0" prefHeight="34.0" prefWidth="301.0" text="%Hire">
          <font>
@@ -18,7 +18,7 @@
       <Label layoutX="256.0" layoutY="152.0" text="%Name" />
       <TextField fx:id="emailField" layoutX="307.0" layoutY="207.0" />
       <Label layoutX="252.0" layoutY="212.0" text="%Email" />
-      <TextField fx:id="salaryField" layoutX="307.0" layoutY="333.0"  />
+      <TextField fx:id="salaryField" layoutX="307.0" layoutY="333.0" />
       <Label layoutX="250.0" layoutY="338.0" text="%Salary" />
       <PasswordField fx:id="passwordField" layoutX="307.0" layoutY="272.0" />
       <Label layoutX="238.0" layoutY="277.0" text="%Password2" />

@@ -96,15 +96,17 @@ public class Controller implements BigController, Initializable {
     public Label brutoEarnings;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
+            goToSales();
+        } catch (Exception e) {
 
+        }
+
+        try {
             userName.setText(LoggedUser.getName());
-
-
         } catch (Exception e) {
 
         }
@@ -212,7 +214,7 @@ public class Controller implements BigController, Initializable {
     }
 
     @FXML
-    public void goToSales(javafx.event.ActionEvent actionEvent) throws Exception {
+    public void goToSales() throws Exception {
         if (currentAnchorPane == 7)
             return;
         loadAnchor(".././partials/Sales.fxml");
@@ -245,7 +247,7 @@ public class Controller implements BigController, Initializable {
         AnchorPane root = null;
         try {
 
-            root = FXMLLoader.load(getClass().getResource(path),Language.getBundle());
+            root = FXMLLoader.load(getClass().getResource(path), Language.getBundle());
             MainPane.add((AnchorPane) root, 1, 1);
 
         } catch (Exception e) {
@@ -286,7 +288,7 @@ public class Controller implements BigController, Initializable {
 
 
     public void loadViewData(String path, int id) throws IOException, SQLException {
-       // TODO:HERE
+        // TODO:HERE
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path), Language.getBundle());
         Parent root = (Parent) loader.load();

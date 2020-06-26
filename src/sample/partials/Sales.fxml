@@ -10,12 +10,12 @@
 
 <AnchorPane prefHeight="544.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.SalesControllers">
    <children>
-      <Label layoutX="66.0" layoutY="496.0" prefHeight="32.0" prefWidth="70.0" text="From">
+      <Label layoutX="66.0" layoutY="496.0" prefHeight="32.0" prefWidth="70.0" text="%From">
          <font>
             <Font name="Ubuntu Condensed" size="31.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="497.0" text="To">
+      <Label layoutX="331.0" layoutY="497.0" text="%To">
          <font>
             <Font name="Ubuntu Condensed" size="30.0" />
          </font>

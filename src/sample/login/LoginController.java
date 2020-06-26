@@ -1,5 +1,6 @@
 package sample.login;
 
+import Helpers.Language;
 import Helpers.PasswordGenerator;
 import Models.PersonModel;
 import StateClasses.BigController;
@@ -7,8 +8,10 @@ import StateClasses.Dbinfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -42,27 +45,59 @@ public class LoginController implements BigController, Initializable {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private RadioButton albanianButton;
+    @FXML
+    private RadioButton englishButton;
+    @FXML
+    private Group radioToggle;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LoggedUser.initialize();
+        addHandler();
+
+    }
+
+    @FXML
+    public void loginWithEnter(KeyEvent event) throws Exception {
+
+        if (event.getCode() == KeyCode.ENTER)
+            loginButton.fire();
 
 
     }
-@FXML
-public void loginWithEnter(KeyEvent event) throws Exception
-{
 
-   if(event.getCode()== KeyCode.ENTER)
-      loginButton.fire();
+    public void addHandler() {
+        albanianButton.setOnMouseClicked(e ->
+        {
+
+            if (englishButton.isSelected())
+                englishButton.setSelected(false);
+
+        });
+
+        englishButton.setOnMouseClicked(e ->
+        {
+            if (albanianButton.isSelected())
+                albanianButton.setSelected(false);
 
 
-}
+        });
+    }
 
 
     @FXML
     public void login(ActionEvent event) throws Exception {
         try {
+
+
+            if (!englishButton.isSelected() && !albanianButton.isSelected())
+                throw new Exception("Pick a language");
+            if (englishButton.isSelected())
+                Language.translate("english");
+            else
+                Language.translate("shqip");
             String email = usernameField.getText();
             String password = passwordField.getText();
 

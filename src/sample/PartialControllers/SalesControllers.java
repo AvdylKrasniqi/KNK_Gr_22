@@ -8,8 +8,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 import StateClasses.BigController;
+import StateClasses.LoggedUser;
 import StateClasses.Sales;
 import StateClasses.Waiter;
+import com.mysql.jdbc.log.Log;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,10 +59,21 @@ public class SalesControllers implements Initializable, BigController {
         return sales;
     }
 
+  public void checkPermissions()
+  {
 
+      if(!LoggedUser.getStatus().equalsIgnoreCase("Admin"))
+      {
+
+          fromDatePicker.setDisable(true);
+          toDatePicker.setDisable(true);
+      }
+
+  }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        checkPermissions();
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));

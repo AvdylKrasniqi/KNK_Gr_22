@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.HelpController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/tables.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PartialControllers.HelpController">
    <children>
       <MenuBar layoutX="-1.0" prefHeight="29.0" prefWidth="800.0">
         <menus>

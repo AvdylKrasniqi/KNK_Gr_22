@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -53,5 +54,9 @@ public class CreateWaiterController  implements Initializable {
                         "Waiter"
                 );
 
+    Stage currentStage = (Stage)nameField.getScene().getWindow();
+    currentStage.close();
+
     }
+
 }

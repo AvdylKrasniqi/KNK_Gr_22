@@ -153,7 +153,7 @@
                   </ImageView>
                     </children>
                 </HBox>
-            <TableView fx:id="tableview" prefHeight="528.0" prefWidth="599.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TableView fx:id="tableview" prefHeight="528.0" prefWidth="599.0" stylesheets="@../css/tables.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <columns>
                 <TableColumn fx:id="idColumn" editable="false" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="titleColumn" editable="false" prefWidth="75.0" text="Title" />

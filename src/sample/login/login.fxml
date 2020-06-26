@@ -50,7 +50,7 @@
             <Label text="Language" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <Group />
+                  <Group fx:id="radioToggle" />
                   <RadioButton fx:id="albanianButton" layoutX="24.0" layoutY="36.0" mnemonicParsing="false" text="Shqip" />
                   <RadioButton fx:id="englishButton" layoutX="144.0" layoutY="36.0" mnemonicParsing="false" text="Anglisht" />
                </children>
