@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -40,8 +41,7 @@ public class HelpController implements Initializable, BigController {
     @FXML
     private MenuItem emailItem;
 
-    private final static  String OS = System.getProperty("os.name").toLowerCase();
-
+    private final static String OS = System.getProperty("os.name").toLowerCase();
 
 
     public void openHelp() throws IOException {
@@ -103,10 +103,24 @@ public class HelpController implements Initializable, BigController {
     public void initializeTree() {
 
         TreeItem<String> mainItem = new TreeItem<>("Help");
-//
-        TreeItem<String> tableItem = createTree("Tavolinat", "Shtimi i tavolines", "Perditesimi i tavolines", "Fshirja e tavolines");
-        TreeItem<String> waiterItem = createTree("Kamarieret", "Shtimi i kamariereve", "Perditsimi i Kamariereve", "Perjashtimi i kamarierve");
-        TreeItem<String> menuItem = createTree("Menu", "Shtimi i produktit", "Perditesimi i produktit", "Fshirja e produktit");
+
+        TreeItem<String>tableItem;
+        TreeItem<String>waiterItem;
+        TreeItem<String>menuItem;
+
+
+
+        if(Language.returnLanguage().equalsIgnoreCase("albanian")) {
+             tableItem = createTree("Tavolinat", "Shtimi i tavolines", "Perditesimi i tavolines", "Fshirja e tavolines");
+            waiterItem = createTree("Kamarieret", "Shtimi i kamariereve", "Perditsimi i Kamariereve", "Perjashtimi i kamarierve");
+            menuItem = createTree("Menu", "Shtimi i produktit", "Perditesimi i produktit", "Fshirja e produktit");
+        }
+        else
+        {
+            tableItem = createTree("Tables", "Adding a table", "Updating a table", "Delte a table");
+           waiterItem = createTree("Waiters", "Adding Waiters", "Updating Waiters", "Removing Waiters");
+            menuItem = createTree("Menu", "Adding Product", "Updating Products", "Deleting a Product");
+        }
         tableItem.setExpanded(true);
         waiterItem.setExpanded(true);
         menuItem.setExpanded(true);
@@ -118,25 +132,21 @@ public class HelpController implements Initializable, BigController {
 
     }
 
-    public static boolean isWindows()
-    {
+    public static boolean isWindows() {
 
         return OS.contains("win");
     }
 
-    public static boolean isMac()
-    {
+    public static boolean isMac() {
         return OS.contains("mac");
     }
 
-    public static boolean isUnix()
-    {
+    public static boolean isUnix() {
         return OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0;
     }
 
 
-    public static void openURL(String url)
-    {
+    public static void openURL(String url) {
 
         Runtime rt = Runtime.getRuntime();
         try {
@@ -162,22 +172,23 @@ public class HelpController implements Initializable, BigController {
             e.printStackTrace();
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     closeItem.setOnAction(e->{
-         Stage currentStage = (Stage) helpTree.getScene().getWindow();
-         currentStage.close();
+        closeItem.setOnAction(e -> {
+            Stage currentStage = (Stage) helpTree.getScene().getWindow();
+            currentStage.close();
 
-     });
-    websiteItem.setOnAction(e->
-    {
-        openURL("www.google.com");
-    });
+        });
+        websiteItem.setOnAction(e ->
+        {
+            openURL("https://avdylkrasniqi.github.io/knkhtmlcontact/index.html");
+        });
 
-    emailItem.setOnAction(e->
-    {
-        openURL("www.youtube.com");
-    });
+        emailItem.setOnAction(e ->
+        {
+            openURL("https://avdylkrasniqi.github.io/knkhtmlcontact/viaemail.html");
+        });
 
 
         initializeTree();

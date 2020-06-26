@@ -83,7 +83,7 @@ public class TableScreenController implements BigController, Initializable {
         this.table.clearTable();
         this.noCheck.setSelected(true);
         this.yesCheck.setSelected(false);
-
+        Controller.numerOfActiveTables--;
 
     }
 
@@ -141,15 +141,19 @@ public class TableScreenController implements BigController, Initializable {
 
 
     @FXML
-    public void saveTable(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././kamarieri/sample.fxml"),Language.getBundle());
+    public void saveTable(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././kamarieri/sample.fxml"), Language.getBundle());
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
         controller.changeTable(this.id, this.table);
+
+        Controller.numerOfActiveTables++;
         Stage stage = (Stage) ((Node) ((ActionEvent) event).getSource()).getScene().getWindow();
         stage.close();
 
+
     }
+
 
 
     @FXML
@@ -186,10 +190,11 @@ public class TableScreenController implements BigController, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             getMenuItems();
+
         } catch (SQLException e) {
             this.show(e);
         }
-
+//        updateActive();
 
     }
 }

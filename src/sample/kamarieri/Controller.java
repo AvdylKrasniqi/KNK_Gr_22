@@ -43,7 +43,8 @@ import java.util.prefs.Preferences;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements BigController, Initializable {
-    public static int numberOfTabels = 0;
+    public static int numberOfTabels=0;
+    public static int numerOfActiveTables=0;
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
@@ -89,11 +90,13 @@ public class Controller implements BigController, Initializable {
     @FXML
     private MenuItem delete = new MenuItem("delete");
     @FXML
-    public Label numberOfTable;
+    private Label numberOfTable;
     @FXML
-    public Label numberOfActiveTables;
+    private Label numberOfActiveTables;
     @FXML
-    public Label brutoEarnings;
+    private Label brutoEarnings;
+
+
 
 
     @Override
@@ -369,6 +372,8 @@ public class Controller implements BigController, Initializable {
             delete.setOnAction(e -> {
                 try {
                     deleteTable(cord);
+                    numberOfTabels--;
+                    updateStatus();
                 } catch (Exception exception) {
                     this.show(exception);
                 }
@@ -383,6 +388,7 @@ public class Controller implements BigController, Initializable {
             add.setOnAction(e -> {
                 try {
                     addNewTable(cord);
+                    updateStatus();
                 } catch (Exception exception) {
                     this.show(exception);
                 }
@@ -396,11 +402,11 @@ public class Controller implements BigController, Initializable {
 
     @FXML
     public void updateValues(MouseEvent event) {
-        try {
-            updateStatus();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+////            updateStatus();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public void addNewTable(int[] gridLocation) throws Exception {
