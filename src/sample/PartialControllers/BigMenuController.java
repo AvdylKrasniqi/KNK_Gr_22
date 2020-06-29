@@ -1,32 +1,23 @@
-package sample.Food;
+package sample.PartialControllers;
 
+import Models.MenuModel;
 import StateClasses.BigController;
-import StateClasses.Dbinfo;
-import StateClasses.MenuController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import java.sql.*;
-
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
-import sample.Menu.DbMenu;
+import StateClasses.DbMenu;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-
+import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.security.Key;
 import java.util.ResourceBundle;
 
-public class FoodController implements BigController, MenuController, Initializable {
-
-    ;
-
-    private Connection conn;
+public class BigMenuController implements Initializable, BigController {
+    private String type;
     @FXML
     private TableView<DbMenu> tableview;
     @FXML
@@ -41,13 +32,6 @@ public class FoodController implements BigController, MenuController, Initializa
     private TextField titleField;
     @FXML
     private TextField priceField;
-    @FXML
-    private Button waiterButton;
-    @FXML
-    private ImageView waiterImage;
-    @FXML
-    private Pane menuPane;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,24 +43,22 @@ public class FoodController implements BigController, MenuController, Initializa
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
         try {
 
-            tableview.setItems(getItems("food"));
+            tableview.setItems(MenuModel.getAllItems());
 
 
         } catch (Exception e) {
             this.show(e);
 
         }
-
         tableview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tableview.getSelectionModel().selectedItemProperty().addListener((ov, old, _new) ->
         {
             if (_new == null)
                 return;
-            this.menuToUI(_new, idField, titleField, priceField);
+            MenuModel.menuToUI(_new, idField, titleField, priceField);
 
         });
 
@@ -86,27 +68,43 @@ public class FoodController implements BigController, MenuController, Initializa
     @FXML
     private void onCreateButtonClick(ActionEvent event) {
         try {
-            DbMenu fromUI = menuFromUI(idField, titleField, priceField);
-            DbMenu create = createItem(fromUI);
+            DbMenu fromUI = MenuModel.menuFromUI(idField, titleField, priceField);
+            DbMenu create = MenuModel.createItem(fromUI,type);
             tableview.getItems().add(create);
-            clearUI(idField, titleField, priceField);
+            MenuModel.clearUI(idField, titleField, priceField);
 
         } catch (Exception e) {
             this.show(e);
         }
+    }
+
+
+    @FXML
+    public void changeType(KeyEvent event) throws Exception {
+        if(event.getCode()== KeyCode.F&& event.isControlDown())
+        {
+            tableview.setItems(MenuModel.getItems("food"));
+            this.type="food";
+        }
+        if(event.getCode()== KeyCode.D&& event.isControlDown())
+        {
+            tableview.setItems(MenuModel.getItems("drink"));
+            this.type="drink";
+        }
+
     }
 
     @FXML
     private void onUpdateButtonClick(ActionEvent event) {
         try {
-            DbMenu form = menuFromUI(idField, titleField, priceField);
-            updateItem(form);
+            DbMenu form = MenuModel.menuFromUI(idField, titleField, priceField);
+            MenuModel.updateItem(form);
             DbMenu selected = tableview.getSelectionModel().getSelectedItem();
             selected.setTitle(form.getTitle());
             selected.setPrice(form.getPrice());
             tableview.refresh();
             tableview.getSelectionModel().clearSelection();
-            clearUI(idField, titleField, priceField);
+            MenuModel.clearUI(idField, titleField, priceField);
         } catch (Exception e) {
             this.show(e);
         }
@@ -114,19 +112,18 @@ public class FoodController implements BigController, MenuController, Initializa
     }
 
     @FXML
-    private void onRemoveButtonClick(ActionEvent event) {
+    private void onDeleteButtonClick(ActionEvent event) {
         try {
             DbMenu tobeExecuted = tableview.getSelectionModel().getSelectedItem();
-            removeItem(tobeExecuted.getId());
+            MenuModel.removeItem(tobeExecuted.getId());
             tableview.getSelectionModel().clearSelection();
             tableview.getItems().remove(tobeExecuted);
-            clearUI(idField, titleField, priceField);
+            MenuModel.clearUI(idField, titleField, priceField);
 
         } catch (Exception e) {
             this.show(e);
         }
 
     }
-
 
 }

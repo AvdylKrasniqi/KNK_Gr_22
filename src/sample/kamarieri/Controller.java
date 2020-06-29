@@ -273,7 +273,7 @@ public class Controller implements BigController, Initializable {
     public void openMenu(javafx.event.ActionEvent actionEvent) throws Exception {
         if (currentAnchorPane == 2)
             return;
-        loadAnchor("../partials/MenuChoices.fxml");
+        loadAnchor("../partials/FinalMenu.fxml");
         currentAnchorPane = 2;
 
 
@@ -312,18 +312,7 @@ public class Controller implements BigController, Initializable {
     }
 
 
-    @FXML
-    public void goToDrinks(ActionEvent actionEvent) throws Exception {
 
-        loadView(actionEvent, "./../Menu/Menu.fxml");
-    }
-
-    @FXML
-    public void goToFood(ActionEvent actionEvent) throws Exception {
-
-        loadView(actionEvent, "./../Food/Food.fxml");
-
-    }
 
     public static int[] getGridLocation(double x, double y) {
         int gridLocation[] = new int[2];

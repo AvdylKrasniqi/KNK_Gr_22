@@ -1,4 +1,4 @@
-package sample.Menu;
+package StateClasses;
 
 public class DbMenu {
 private int id;

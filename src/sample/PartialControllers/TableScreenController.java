@@ -6,7 +6,6 @@ import StateClasses.BigController;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import sample.kamarieri.Controller;
 import StateClasses.Tables;
 import javafx.collections.FXCollections;
@@ -18,21 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import sample.Menu.DbMenu;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.geometry.Insets;
-import sample.kamarieri.Controller;
 import StateClasses.Dbinfo;
-
-import javax.swing.*;
 
 
 public class TableScreenController implements BigController, Initializable {
