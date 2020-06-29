@@ -71,12 +71,10 @@ public class HelpController implements Initializable, BigController {
 
     }
 
-    public static boolean isNotClickable(String text)
-    {
-        String[] words = new String[]{"Tavolinat","Kamarieret","Menu","Tables","Waiters","Help"};
-        for(String word: words)
-        {
-            if(text.equalsIgnoreCase(word))
+    public static boolean isNotClickable(String text) {
+        String[] words = new String[]{"Tavolinat", "Kamarieret", "Menu", "Tables", "Waiters", "Help"};
+        for (String word : words) {
+            if (text.equalsIgnoreCase(word))
                 return true;
         }
         return false;
@@ -88,7 +86,7 @@ public class HelpController implements Initializable, BigController {
         // Accept clicks only on node cells, and not on empty spaces of the TreeView
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
             String name = (String) ((TreeItem) helpTree.getSelectionModel().getSelectedItem()).getValue();
-            if(isNotClickable(name))
+            if (isNotClickable(name))
                 return;
             helpText.setText(readColumn("src/help/" + name + ".txt"));
         }
@@ -101,7 +99,7 @@ public class HelpController implements Initializable, BigController {
             StringBuilder fileText = new StringBuilder();
             fileContent = new Scanner(file);
             while (fileContent.hasNext()) {
-                fileText.append(fileContent.nextLine()+"\n");
+                fileText.append(fileContent.nextLine() + "\n");
             }
             if (fileText.toString().length() == 0)
                 throw new Exception("Empty file");
@@ -189,10 +187,10 @@ public class HelpController implements Initializable, BigController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       if(Language.returnLanguage().equalsIgnoreCase("english"))
-           helpText.setText("Welcome to the help section on our program.\nOn your right you can see the categories in which we offer help, you can select them and the appropiate infromation will appear.");
+        if (Language.returnLanguage().equalsIgnoreCase("english"))
+            helpText.setText("Welcome to the help section on our program.\nOn your left you can see the categories in which we offer help, you can select them and the appropiate infromation will appear.");
         else
-            helpText.setText("qiju");
+            helpText.setText("Miresevini ne pjesen e ndihmes te programit tone.\n Ne te majten tuaj mund te shihni kategorine per te cilat mbas selektimit do te paraqitet informacioni per perdorimin e tyre.");
 
         closeItem.setOnAction(e -> {
             Stage currentStage = (Stage) helpTree.getScene().getWindow();

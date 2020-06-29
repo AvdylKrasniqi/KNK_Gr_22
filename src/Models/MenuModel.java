@@ -11,34 +11,31 @@ import java.util.Observable;
 
 public class MenuModel {
     public static ResultSet getItem() throws SQLException {
-        Connection con=Dbinfo.startConnection() ;
-        String query="SELECT * FROM Menu Order by MenuId DESC limit 1";
+        Connection con = Dbinfo.startConnection();
+        String query = "SELECT * FROM Menu Order by MenuId DESC limit 1";
         PreparedStatement stmt = con.prepareStatement(query);
         return stmt.executeQuery();
 
     }
 
-    public static DbMenu createItem(DbMenu menu,String type) throws Exception {
+    public static DbMenu createItem(DbMenu menu, String type) throws Exception {
 
-       if(!type.equalsIgnoreCase("drink") && !type.equalsIgnoreCase("food"))
-       {
-           throw new Exception("You didn't pick a type");
-       }
+        if (!type.equalsIgnoreCase("drink") && !type.equalsIgnoreCase("food")) {
+            throw new Exception("You didn't pick a type");
+        }
         Connection conn = Dbinfo.startConnection();
         String sql = "INSERT INTO Menu (price,MenuType,Title) values(?,?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-       stmt.setDouble(1,menu.getPrice());
-       stmt.setString(2,type);
-       stmt.setString(3,menu.getTitle());
-      stmt.executeUpdate();
-      ResultSet result=getItem();
-      if(result.next())
-       {
-           return new DbMenu(result.getInt(1),result.getDouble("price"),result.getString("Title"));
-                   //1 2 5  id title price
+        stmt.setDouble(1, menu.getPrice());
+        stmt.setString(2, type);
+        stmt.setString(3, menu.getTitle());
+        stmt.executeUpdate();
+        ResultSet result = getItem();
+        if (result.next()) {
+            return new DbMenu(result.getInt(1), result.getDouble("price"), result.getString("Title"));
 
-       }
-       else throw new Exception("Something went wrong with adding ");
+
+        } else throw new Exception("Something went wrong with adding ");
 
     }
 
@@ -123,7 +120,7 @@ public class MenuModel {
 
     }
 
-   public static  void menuToUI(DbMenu menu, TextField idField, TextField titleField, TextField priceField) {
+    public static void menuToUI(DbMenu menu, TextField idField, TextField titleField, TextField priceField) {
         idField.setText(Integer.toString(menu.getId()));
         titleField.setText(menu.getTitle());
         priceField.setText(Double.toString(menu.getPrice()));

@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class TableScreenController implements BigController, Initializable {
         this.table.clearTable();
         this.noCheck.setSelected(true);
         this.yesCheck.setSelected(false);
-        Controller.numerOfActiveTables--;
+
 
     }
 
@@ -93,6 +94,7 @@ public class TableScreenController implements BigController, Initializable {
 
 
     }
+
 
     public double getPriceId() throws Exception {
         Connection con = Dbinfo.startConnection();
@@ -138,7 +140,6 @@ public class TableScreenController implements BigController, Initializable {
         Controller controller = loader.getController();
         controller.changeTable(this.id, this.table);
 
-        Controller.numerOfActiveTables++;
         Stage stage = (Stage) ((Node) ((ActionEvent) event).getSource()).getScene().getWindow();
         stage.close();
 
@@ -146,9 +147,8 @@ public class TableScreenController implements BigController, Initializable {
     }
 
 
-
     @FXML
-    public void addItem(ActionEvent event) throws SQLException {
+    public void addItem(ActionEvent event) throws SQLException, IOException {
         this.table.occupyTable();
         this.yesCheck.setSelected(true);
         this.noCheck.setSelected(false);
@@ -171,7 +171,7 @@ public class TableScreenController implements BigController, Initializable {
 
         this.table.addProduct(currentItem, price, quantity);
         this.table.increaseTotalPrice(price * quantity);
-        System.out.println(this.table.toString());
+
 
         con.close();
 

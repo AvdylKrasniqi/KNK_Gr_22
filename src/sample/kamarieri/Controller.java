@@ -45,7 +45,6 @@ import java.util.prefs.Preferences;
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements BigController, Initializable {
     public static int numberOfTabels = 0;
-    public static int numerOfActiveTables = 0;
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
@@ -208,7 +207,7 @@ public class Controller implements BigController, Initializable {
         Scene scene = new Scene((Parent) pane);
         Stage alertStage = new Stage();
         alertStage.setScene(scene);
-        alertStage.setTitle("Info Scene");
+        alertStage.setTitle("GUI na ndihmon per Industri");
         alertStage.show();
 
     }

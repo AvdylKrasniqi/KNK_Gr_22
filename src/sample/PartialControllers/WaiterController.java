@@ -44,6 +44,8 @@ public class WaiterController implements Initializable, BigController {
     @FXML
     private TableColumn<Waiter, String> joinedColumn;
 
+
+
     public ObservableList<Waiter> getWaiters() throws Exception {
 
         ObservableList<Waiter> waiters = FXCollections.observableArrayList();
