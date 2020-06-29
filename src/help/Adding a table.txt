@@ -1,0 +1,3 @@
+We add a table by going into the Table view.
+Then we right click into the empty space on the right to open a context menu.
+On the context menu the option add is the appropiate option that adds the table visually and increments the number of tables on the status by 1.

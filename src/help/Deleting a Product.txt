@@ -1,0 +1,1 @@
+Deleting a product is done by selecting the appropiate product in the table and then pressing the delete button.

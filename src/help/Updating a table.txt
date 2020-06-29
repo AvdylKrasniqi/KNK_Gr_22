@@ -1,0 +1,4 @@
+We update a table by pressing the right click button on the context menu.
+The context menu opening is explained in the adding table part in this help section.
+Then we can add the products selected by the client which means that the table is occupied at the moment.
+We can also see all the products that are bought and in the end clear the table with the  clear button which opens up the table for other clients.

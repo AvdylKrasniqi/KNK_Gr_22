@@ -1,0 +1,2 @@
+Adding a product is done by going on the Menu view.
+Then we fill in the form on the bottom and press the add button.

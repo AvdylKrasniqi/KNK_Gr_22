@@ -106,7 +106,7 @@
                         <Image url="@../Images/icons8-table-96.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="58.0" layoutY="349.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" stylesheets="@../css/style.css" text="%About" />
+                  <Button layoutX="58.0" layoutY="349.0" mnemonicParsing="false" onAction="#openAbout" prefHeight="33.0" prefWidth="130.0" stylesheets="@../css/style.css" text="%About" />
                </children></Pane>
             <AnchorPane fx:id="aboutPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="dropbox" stylesheets="@../css/style.css" GridPane.columnIndex="1">

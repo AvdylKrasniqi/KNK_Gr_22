@@ -105,9 +105,10 @@ public interface BigController {
 
     }
 
+
+
     default public void show(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        e.printStackTrace();
         alert.setContentText(e.getMessage());
         alert.showAndWait();
      if(e.getMessage().equalsIgnoreCase("Nuk je logged in"))

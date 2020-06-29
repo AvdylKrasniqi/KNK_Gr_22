@@ -1,0 +1,2 @@
+We remove waiters by going into the Waiters view and pressing the delete button.
+This should be done by selecting the appropiate waiter in the table.

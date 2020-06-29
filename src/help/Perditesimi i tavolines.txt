@@ -1,0 +1,8 @@
+Perditesimi i tavolines  fillimisht behet duke shkuar ne pamjen e tavolines.
+Pastaj duke shtypur butonin e djathte te miut na hapet nje menu ku aty zgjedhim opsionin Update.
+Pas kesaj na hapet nje pamje tjeter  ku mund te manipulojme tavolinen.
+Ne kete pamje mund te shtojme produkte te porositura nga klienti, mund te shikojme te gjitha produktet e blera dhe te pastrojme tavolinen.
+Pastrimi i tavolines ndodh mbas largimit te 1 klientit ku behet pergaditja per klientin tjeter.
+Tek detajet mund te shohim te gjitha produktet e tavolines aktuale.
+
+

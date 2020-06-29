@@ -1,0 +1,2 @@
+Adding waiters is done by going into the Waiters view.
+After that we press the add button which brings up a form that we fill to add the waiter.

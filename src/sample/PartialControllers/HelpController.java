@@ -71,11 +71,25 @@ public class HelpController implements Initializable, BigController {
 
     }
 
+    public static boolean isNotClickable(String text)
+    {
+        String[] words = new String[]{"Tavolinat","Kamarieret","Menu","Tables","Waiters","Help"};
+        for(String word: words)
+        {
+            if(text.equalsIgnoreCase(word))
+                return true;
+        }
+        return false;
+    }
+
+
     public void handleMouseClicked(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
         // Accept clicks only on node cells, and not on empty spaces of the TreeView
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
             String name = (String) ((TreeItem) helpTree.getSelectionModel().getSelectedItem()).getValue();
+            if(isNotClickable(name))
+                return;
             helpText.setText(readColumn("src/help/" + name + ".txt"));
         }
     }
@@ -87,11 +101,13 @@ public class HelpController implements Initializable, BigController {
             StringBuilder fileText = new StringBuilder();
             fileContent = new Scanner(file);
             while (fileContent.hasNext()) {
-                fileText.append(fileContent.nextLine());
+                fileText.append(fileContent.nextLine()+"\n");
             }
+            if (fileText.toString().length() == 0)
+                throw new Exception("Empty file");
             return fileText.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            this.show(e);
         } finally {
 
             if (fileContent != null)
@@ -104,21 +120,18 @@ public class HelpController implements Initializable, BigController {
 
         TreeItem<String> mainItem = new TreeItem<>("Help");
 
-        TreeItem<String>tableItem;
-        TreeItem<String>waiterItem;
-        TreeItem<String>menuItem;
+        TreeItem<String> tableItem;
+        TreeItem<String> waiterItem;
+        TreeItem<String> menuItem;
 
 
-
-        if(Language.returnLanguage().equalsIgnoreCase("albanian")) {
-             tableItem = createTree("Tavolinat", "Shtimi i tavolines", "Perditesimi i tavolines", "Fshirja e tavolines");
+        if (Language.returnLanguage().equalsIgnoreCase("albanian")) {
+            tableItem = createTree("Tavolinat", "Shtimi i tavolines", "Perditesimi i tavolines", "Fshirja e Tavolines");
             waiterItem = createTree("Kamarieret", "Shtimi i kamariereve", "Perditsimi i Kamariereve", "Perjashtimi i kamarierve");
             menuItem = createTree("Menu", "Shtimi i produktit", "Perditesimi i produktit", "Fshirja e produktit");
-        }
-        else
-        {
-            tableItem = createTree("Tables", "Adding a table", "Updating a table", "Delte a table");
-           waiterItem = createTree("Waiters", "Adding Waiters", "Updating Waiters", "Removing Waiters");
+        } else {
+            tableItem = createTree("Tables", "Adding a table", "Updating a table", "Delete a table");
+            waiterItem = createTree("Waiters", "Adding Waiters", "Updating Waiters", "Removing Waiters");
             menuItem = createTree("Menu", "Adding Product", "Updating Products", "Deleting a Product");
         }
         tableItem.setExpanded(true);
@@ -175,6 +188,12 @@ public class HelpController implements Initializable, BigController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+       if(Language.returnLanguage().equalsIgnoreCase("english"))
+           helpText.setText("Welcome to the help section on our program.\nOn your right you can see the categories in which we offer help, you can select them and the appropiate infromation will appear.");
+        else
+            helpText.setText("qiju");
+
         closeItem.setOnAction(e -> {
             Stage currentStage = (Stage) helpTree.getScene().getWindow();
             currentStage.close();

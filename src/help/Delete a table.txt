@@ -1,0 +1,1 @@
+Deleting a table is done by pressing the right side mouse button and pressing the delete button on the context menu.

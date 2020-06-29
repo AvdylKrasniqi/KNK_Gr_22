@@ -32,7 +32,7 @@ public class SalesModel {
 
     public static int getTodaysSales() throws  Exception
     {
-        System.out.println(new Date(new java.util.Date().getTime()));
+
         Connection con =Dbinfo.startConnection();
         String query="SELECT sum(amount) as  'shuma' from Sales where DATE(data)=?";
         PreparedStatement statement=con.prepareStatement(query);

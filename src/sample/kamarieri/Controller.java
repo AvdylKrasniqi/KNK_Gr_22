@@ -26,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -43,8 +44,8 @@ import java.util.prefs.Preferences;
 
 //TODO: about ---->(Genci,Albini)  waiters-->(Avdyli,Bardhi)
 public class Controller implements BigController, Initializable {
-    public static int numberOfTabels=0;
-    public static int numerOfActiveTables=0;
+    public static int numberOfTabels = 0;
+    public static int numerOfActiveTables = 0;
     // tehcnically hashmapi  i dyt duhet mu kon <string,double> per produkte
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
@@ -97,8 +98,6 @@ public class Controller implements BigController, Initializable {
     private Label brutoEarnings;
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -115,11 +114,10 @@ public class Controller implements BigController, Initializable {
         }
         try {
             ResultSet result = TableModel.getTables();
-            System.out.println(numberOfTabels);
             while (result.next()) {
-                System.out.println("test 1");
+
                 if (occupiedTable[result.getInt(2)][result.getInt(3)]) {
-                    System.out.println("test 2");
+
                     continue;
                 }
 
@@ -188,12 +186,32 @@ public class Controller implements BigController, Initializable {
 
     public void updateEarnings() throws Exception {
         int todaySales = SalesModel.getTodaysSales();
-        System.out.println(todaySales);
         this.brutoEarnings.setText("Fitimi bruto  per sot: " + todaySales);
 
 
     }
 
+
+    public void alertAbout() {
+        Image testImage;
+        if (Language.returnLanguage().equalsIgnoreCase("english"))
+            testImage = new Image(getClass().getResource("../Images/english.jpg").toExternalForm());
+        else
+            testImage = new Image(getClass().getResource("../Images/shqip.jpg").toExternalForm());
+        AnchorPane pane = new AnchorPane();
+        ImageView testImageView = new ImageView(testImage);
+        testImageView.setFitHeight(300);
+        testImageView.setFitWidth(600);
+        pane.getChildren().add(testImageView);
+
+
+        Scene scene = new Scene((Parent) pane);
+        Stage alertStage = new Stage();
+        alertStage.setScene(scene);
+        alertStage.setTitle("Info Scene");
+        alertStage.show();
+
+    }
 
     @FXML
     public void logOut(ActionEvent event) throws Exception {
@@ -226,10 +244,7 @@ public class Controller implements BigController, Initializable {
 
     @FXML
     public void openAbout(javafx.event.ActionEvent actionEvent) throws Exception {
-        if (currentAnchorPane == 3)
-            return;
-        loadAnchor(".././about/about.fxml");
-        currentAnchorPane = 3;
+        alertAbout();
     }
 
     public void removeAnchor() {
@@ -310,8 +325,6 @@ public class Controller implements BigController, Initializable {
 
 
     }
-
-
 
 
     public static int[] getGridLocation(double x, double y) {

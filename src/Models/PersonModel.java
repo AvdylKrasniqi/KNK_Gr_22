@@ -49,11 +49,10 @@ public class PersonModel {
     }
 
 
-    public static void insertUser(String name, String email, String password, double salary, String status) throws SQLException, NoSuchProviderException, NoSuchAlgorithmException {
+    public static void insertUser(String name, String email, String password, double salary, String status) throws Exception{
 
         if (!isValidPassword(password)) {
-            System.out.println("Password i papershtatshem");
-            return;
+           throw new Exception("Password i papershtatshem");
         }
         Connection con = Dbinfo.startConnection();
         String saltedPassword = PasswordGenerator.generateSaltedPassword(password);

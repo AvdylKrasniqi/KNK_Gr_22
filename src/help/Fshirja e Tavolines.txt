@@ -1,0 +1,3 @@
+Fshirja e  tavolines fillimisht behet duke hyre ne pamjen Tables me ane te butonit majtas.
+Pas hyrjes ne ate pamje duhet te shtypim butonin e djathte te miut qe hap nje menu ku gjendet edhe butoni qe fshin tavolinen
+Pas fshirjes ne pamje do te zhduket tavolina  do te zvoglohet numri i tavolinave poshte  per 1.

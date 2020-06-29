@@ -1,0 +1,3 @@
+Per perditesimin e produktit ne mund te perdorim pamjen e njejte qe eshte Menu.
+Pastaj duhet te selektojme produktin e  caktuar duke e shtypur ne tabele me tastin e majte ne maus.
+Poshte do te paraqitet informacioni per ate produkt ku mund ta ndryshojme dhe pasi te prekim butonin e caktuar per ndryshim, ndryshimi do te paraqitet.

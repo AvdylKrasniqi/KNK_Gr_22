@@ -1,0 +1,3 @@
+We can update products by pressing them  in the table therefore selecting them.
+After that we just change the bottom fields in the ones we want  and then press the update button .
+The change will be also visibly seen.

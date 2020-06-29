@@ -1,0 +1,5 @@
+Shtimi i tavolines fillimisht behet duke hyre ne pamjen Tables me ane te butonit majtas.
+
+Pas hyrjes ne ate pamje duhet te shtypim butonin e djathte te miut qe hap nje menu ku gjendet edhe butoni qe shton tavolinen
+
+Pas shtimit ne pamje do te paraqitet 1 tavoline me emrin e saj qe perfshin numrin e tavolines dhe numri i tavolinave poshte do te rritet per 1.

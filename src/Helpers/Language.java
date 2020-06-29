@@ -5,31 +5,30 @@ import java.util.ResourceBundle;
 
 public class Language {
     private static ResourceBundle bundle;
-    private static String language="english";
+    private static String lang;
 
     public static void translate(String language) {
+        Locale locale;
         if (language.equalsIgnoreCase("english")) {
-            Locale locale = new Locale("en", "UK");
-            language="english";
-            bundle = ResourceBundle.getBundle("Languages.strings", locale);
+            locale = new Locale("en", "UK");
+            lang= "english";
         }
-        if (language.equalsIgnoreCase("shqip")) {
-            Locale locale = new Locale("xk", "AL");
-            language="albanian";
-            bundle = ResourceBundle.getBundle("Languages.strings", locale);
+        else {
+            locale = new Locale("xk", "AL");
+            lang = "albanian";
 
         }
-
+        bundle = ResourceBundle.getBundle("Languages.strings", locale);
 
 
     }
 
     public static ResourceBundle getBundle() {
-       return bundle;
+        return bundle;
     }
-    public static String returnLanguage()
-    {
-        return language;
+
+    public static String returnLanguage() {
+        return lang;
     }
 
 }

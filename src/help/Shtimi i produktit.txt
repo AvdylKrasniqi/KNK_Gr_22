@@ -1,0 +1,3 @@
+Per shtimin e produktit duhet te shkojme tek pamja Menu.
+Aty ne do te caktojme llojin e produktit me ane te shkurtesave te tasteries  ku ctrl+d paraqet pijet dhe ctrl+f paraqet ushqimin.
+Pastaj duhet te shkruajme titullin dhe cmimin per ate produkt dhe te prekim butonin shto.

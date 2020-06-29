@@ -1,0 +1,2 @@
+We update the waiters by pressing in the cell  we want to update on the waiter column in the Waiters view.
+After that we change the value and in the end we unfocus from the cell and after unfocusing the change will be done.
