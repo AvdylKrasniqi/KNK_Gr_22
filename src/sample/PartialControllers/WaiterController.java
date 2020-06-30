@@ -45,6 +45,17 @@ public class WaiterController implements Initializable, BigController {
     private TableColumn<Waiter, String> joinedColumn;
 
 
+    public void updateWaiters(Waiter waiter) {
+        waiterTable.getItems().add(waiter);
+        waiterTable.refresh();
+
+    }
+
+    @FXML
+    public void refreshWaiters() throws Exception {
+        waiterTable.setItems(getWaiters());
+    }
+
 
     public ObservableList<Waiter> getWaiters() throws Exception {
 
@@ -114,30 +125,29 @@ public class WaiterController implements Initializable, BigController {
     }
 
     @FXML
-    public void updateName(TableColumn.CellEditEvent<Waiter,String> nameEditEvent) throws Exception {
-    Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
-    currentWaiter.setName(nameEditEvent.getNewValue());
-    PersonModel.updateWaiterOnDb(currentWaiter,currentWaiter.getEmail());
+    public void updateName(TableColumn.CellEditEvent<Waiter, String> nameEditEvent) throws Exception {
+        Waiter currentWaiter = waiterTable.getSelectionModel().getSelectedItem();
+        currentWaiter.setName(nameEditEvent.getNewValue());
+        PersonModel.updateWaiterOnDb(currentWaiter, currentWaiter.getEmail());
     }
 
     @FXML
-    public void updateEmail(TableColumn.CellEditEvent<Waiter,String> emailEditEvent) throws Exception {
-        Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
-        if(PersonModel.isUser(emailEditEvent.getNewValue()))
-        {
+    public void updateEmail(TableColumn.CellEditEvent<Waiter, String> emailEditEvent) throws Exception {
+        Waiter currentWaiter = waiterTable.getSelectionModel().getSelectedItem();
+        if (PersonModel.isUser(emailEditEvent.getNewValue())) {
             throw new Exception("Email taken");
         }
-        PersonModel.updateWaiterOnDb(currentWaiter,emailEditEvent.getNewValue());
+        PersonModel.updateWaiterOnDb(currentWaiter, emailEditEvent.getNewValue());
 
         currentWaiter.setEmail(emailEditEvent.getNewValue());
 
     }
+
     @FXML
-    public void updateSalary(TableColumn.CellEditEvent<Waiter,Double> salaryEditEvent) throws Exception
-    {
-        Waiter currentWaiter=waiterTable.getSelectionModel().getSelectedItem();
+    public void updateSalary(TableColumn.CellEditEvent<Waiter, Double> salaryEditEvent) throws Exception {
+        Waiter currentWaiter = waiterTable.getSelectionModel().getSelectedItem();
         currentWaiter.setSalary(Double.parseDouble(String.valueOf(salaryEditEvent.getNewValue())));
-        PersonModel.updateWaiterOnDb(currentWaiter,currentWaiter.getEmail());
+        PersonModel.updateWaiterOnDb(currentWaiter, currentWaiter.getEmail());
     }
 
 

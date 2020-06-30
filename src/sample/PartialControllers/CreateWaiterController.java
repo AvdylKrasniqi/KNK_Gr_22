@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -29,8 +30,17 @@ public class CreateWaiterController implements Initializable {
     private PasswordField passwordField;
     @FXML
     private TextField salaryField;
+    private FXMLLoader loader;
 
-
+    public void updateWaiterController(Waiter waiter) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(".././partials/Waiter.fxml"), Language.getBundle());
+        Parent root =loader.load();
+        WaiterController controller=loader.getController();
+        controller.updateWaiters(waiter);
+    }
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -52,8 +62,10 @@ public class CreateWaiterController implements Initializable {
                         Double.parseDouble(salaryField.getText()),
                         "Waiter"
                 );
-
-        Stage currentStage = (Stage) nameField.getScene().getWindow();
+            Waiter updateWaiter = new Waiter(nameField.getText(),emailField.getText(),Double.parseDouble(salaryField.getText()),new Date());
+            updateWaiterController(updateWaiter);
+     
+           Stage currentStage = (Stage) nameField.getScene().getWindow();
         currentStage.close();
 
 

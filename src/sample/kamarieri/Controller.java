@@ -49,7 +49,7 @@ public class Controller implements BigController, Initializable {
     int currentAnchorPane = 0;
     private boolean[][] occupiedTable = new boolean[5][5];
     //      private ArrayList<Tables> Tavolinat= new ArrayList<>(25);
-    private HashMap<Integer, Tables> Tavolinat = new HashMap<>();
+    private static HashMap<Integer, Tables> Tavolinat = new HashMap<>();
     // sales ne databaze 
 
     @FXML
@@ -80,11 +80,13 @@ public class Controller implements BigController, Initializable {
     private Label userName;
     @FXML
     private ContextMenu tableContext = new ContextMenu();
-
+    private static boolean hasEntered = false;
     @FXML
     private ContextMenu tableFullContext = new ContextMenu();
     @FXML
     private MenuItem add = new MenuItem("add");
+    @FXML
+    private MenuItem refresh = new MenuItem("refresh");
     @FXML
     private MenuItem update = new MenuItem("Update");
     @FXML
@@ -116,7 +118,6 @@ public class Controller implements BigController, Initializable {
             while (result.next()) {
 
                 if (occupiedTable[result.getInt(2)][result.getInt(3)]) {
-
                     continue;
                 }
 
@@ -131,8 +132,11 @@ public class Controller implements BigController, Initializable {
                 tablesGrid.add(text, result.getInt(2), result.getInt(3));
                 occupiedTable[result.getInt(2)][result.getInt(3)] = true;
                 int place = result.getInt(2) * 5 + result.getInt(3);
-                this.Tavolinat.put(place, new Tables(place));
+                if (!hasEntered) {
 
+                    Tavolinat.put(place, new Tables(place));
+                    hasEntered = true;
+                }
                 numberOfTabels++;
             }
         } catch (Exception e) {
@@ -147,10 +151,11 @@ public class Controller implements BigController, Initializable {
         this.hideTopSecret(menuPane, waiterButton, waiterImage);
 
         if (LoggedUser.getStatus().equalsIgnoreCase("Admin")) {
-            tableContext.getItems().addAll(add);
-            tableFullContext.getItems().addAll(update, delete);
+            tableContext.getItems().add(add);
+            tableFullContext.getItems().addAll(update, delete,refresh);
         } else {
-            tableFullContext.getItems().add(update);
+            tableContext.getItems().add(refresh);
+            tableFullContext.getItems().addAll(update,refresh);
         }
 
         try {
@@ -247,10 +252,7 @@ public class Controller implements BigController, Initializable {
     }
 
     public void removeAnchor() {
-// krim kunder njerezimit po spo di qysh leshi me ndreq gridpane u heartless bitch
         MainPane.getChildren().remove(4);
-
-
     }
 
     public void changeTable(int id, Tables table) {
@@ -362,6 +364,9 @@ public class Controller implements BigController, Initializable {
 
         int[] currentLocation = getGridLocation(event.getScreenX(), event.getScreenY());
         int[] cord = getGridLocation(event.getX(), event.getY());
+
+
+
         if (occupiedTable[cord[0]][cord[1]]) {
             update.setOnAction(e -> {
                 try {
@@ -398,6 +403,15 @@ public class Controller implements BigController, Initializable {
 
             tableFullContext.hide();
         }
+
+        refresh.setOnAction(e->{
+            try {
+                updateStatus();
+            } catch (Exception exception) {
+                this.show(exception);
+            }
+        });
+
 
     }
 

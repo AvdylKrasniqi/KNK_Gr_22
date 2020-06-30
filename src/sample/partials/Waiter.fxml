@@ -20,5 +20,6 @@
       </TableView>
       <Button layoutX="55.0" layoutY="493.0" mnemonicParsing="false" onAction="#onCreateWaiter" stylesheets="@../css/button.css" text="%Create" />
       <Button layoutX="465.0" layoutY="493.0" mnemonicParsing="false" onAction="#onDeleteWaiter" stylesheets="@../css/button.css" text="%Delete" />
+      <Button layoutX="266.0" layoutY="495.0" mnemonicParsing="false" onAction="#refreshWaiters" stylesheets="@../css/button.css" text="Refresh" />
    </children>
 </AnchorPane>
