@@ -1,14 +1,17 @@
 package StateClasses;
 
 import javax.xml.transform.Result;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.*;
+import java.util.Properties;
 
 public class Dbinfo {
     // duhet options qitu
     private static Connection con;
-    private static final String firstConnection = "jdbc:mysql://185.67.178.114:3306/art_knk_db";
-    private static final String username = "art_knk";
-    private static final String password = "OyRKDSix1BfEk0+vqgKqTbOqxYz3RVsX7R0HOL7+";
+    private static  String firstConnection;
+    private static String username;
+    private static String password;
 
 
     public static ResultSet executeQuery(String query) throws SQLException {
@@ -16,6 +19,28 @@ public class Dbinfo {
         PreparedStatement stmt =con.prepareStatement(query) ;
     ResultSet results = stmt.executeQuery();
         return results;
+    }
+//
+//    FileReader reader=new FileReader("db.properties");
+//
+//    Properties p=new Properties();
+//    p.load(reader);
+
+    public static void readCredentials()
+    {
+        try {
+          FileReader reader = new FileReader("src/StateClasses/Dbinfo.properties");
+            Properties properties =new Properties();
+            properties.load(reader);
+            firstConnection=properties.getProperty("firstConnection");
+            username=properties.getProperty("username");
+            password=properties.getProperty("password");
+        }
+        catch(Exception e )
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static String getConnectionName() {

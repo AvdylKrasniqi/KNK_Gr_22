@@ -23,10 +23,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -290,6 +287,11 @@ public class Controller implements BigController, Initializable {
         if (currentAnchorPane == 2)
             return;
         loadAnchor("../partials/FinalMenu.fxml");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Info per perdorim");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.setContentText("Per te pare pijet prekni ctrl+D kurse per ushqim ctrl+F");
+        alert.showAndWait();
         currentAnchorPane = 2;
 
 

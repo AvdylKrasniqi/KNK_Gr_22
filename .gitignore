@@ -1,4 +1,5 @@
 albcaffe.iml
 workspace.xml
 .idea/
+Dbinfo.properties
 *.class

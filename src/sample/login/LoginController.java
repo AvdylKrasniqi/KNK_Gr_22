@@ -54,6 +54,7 @@ public class LoginController implements BigController, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       Dbinfo.readCredentials();
         LoggedUser.initialize();
         addHandler();
 
